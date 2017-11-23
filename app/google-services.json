@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "718022107663",
+    "project_id": "firebase-jogiyo"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:718022107663:android:edb71e55d75bac1c",
+        "android_client_info": {
+          "package_name": "com.example.misconstructed.jogiyo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "718022107663-npqd84f6nu8qv092rb2hmo8qgi026chs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.misconstructed.jogiyo",
+            "certificate_hash": "8e397f8cc82c26145f0ba0cf817ec8bcc6d65f75"
+          }
+        },
+        {
+          "client_id": "718022107663-e72amiuhf3utmqk111rc1jir151af2dk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJu5T4uQyttH-esbEb7Ze-sH2n7Y6-1wA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

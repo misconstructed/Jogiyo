@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Jogiyo</string>
+    <string name="facebook_id">225887417949959</string>
+    <string name="server_client_id">718022107663-r3llpceo652he982nn2j0ltmo0apdcpu.apps.googleusercontent.com</string>
+    <string name="title_activity_mymap">MymapActivity</string>
+    <string name="title_activity_preferences">PreferencesActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+</resources>

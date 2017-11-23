@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="theme_color">#4E88D0</color>
+    <color name="sidebar_id">#8C8C8C</color>
+    <color name="sidebar">#F6F6F6</color>
+    <color name="background">#F0F0F0</color>
+    <color name="test">#FFFFFF</color>
+    <color name="test2">#FFFFFF</color>
+    <color name="test3">#FFFFFF</color>
+</resources>
+
+   <!-- theme color :  #57AED2 , #4E88D0 -->

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/mymap_menu"
+            android:icon="@drawable/map"
+            android:title="My Map" />
+        <item
+            android:id="@+id/checkin_menu"
+            android:icon="@drawable/list"
+            android:title="Check In" />
+        <item
+            android:id="@+id/preferences_menu"
+            android:icon="@drawable/setting"
+            android:title="Preferences" />
+    </group>
+
+    <item
+        android:id="@+id/logout_menu"
+        android:icon="@drawable/logout"
+        android:title="Log Out" />
+</menu>
+
+    <!-- 사이드바 메뉴들 표시  -->
