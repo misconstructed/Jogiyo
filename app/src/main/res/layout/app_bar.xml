@@ -39,6 +39,15 @@
     <include layout="@layout/checkin" />
     <include layout="@layout/preferences"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:elevation="16dp"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
 
 </android.support.design.widget.CoordinatorLayout>
 

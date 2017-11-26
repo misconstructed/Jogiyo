@@ -3,6 +3,7 @@ package com.example.misconstructed.jogiyo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -28,6 +29,7 @@ public class SidebarActivity extends AppCompatActivity
     private RelativeLayout checkin;
     private RelativeLayout preferences;
     private TextView label;
+    private FloatingActionButton add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,7 @@ public class SidebarActivity extends AppCompatActivity
         checkin.setVisibility(View.INVISIBLE);
         preferences.setVisibility(View.INVISIBLE);
         label=(TextView)findViewById(R.id.title);
+        add=(FloatingActionButton)findViewById(R.id.add);
     }
 
     @Override
@@ -97,18 +100,21 @@ public class SidebarActivity extends AppCompatActivity
             checkin.setVisibility(View.INVISIBLE);
             preferences.setVisibility(View.INVISIBLE);
             label.setText("My Map");
+            add.setVisibility(View.VISIBLE);
         } else if (id == R.id.checkin_menu) {
             Toast.makeText(getApplicationContext(), "Check In", Toast.LENGTH_LONG).show();
             mymap.setVisibility(View.INVISIBLE);
             checkin.setVisibility(View.VISIBLE);
             preferences.setVisibility(View.INVISIBLE);
             label.setText("Check In");
+            add.setVisibility(View.VISIBLE);
         } else if (id == R.id.preferences_menu) {
             Toast.makeText(getApplicationContext(), "Preferences", Toast.LENGTH_LONG).show();
             mymap.setVisibility(View.INVISIBLE);
             checkin.setVisibility(View.INVISIBLE);
             preferences.setVisibility(View.VISIBLE);
             label.setText("Preferences");
+            add.setVisibility(View.INVISIBLE);
         } else if (id == R.id.logout_menu) {
             Toast.makeText(getApplicationContext(), "Log Out", Toast.LENGTH_LONG).show();
             intent = new Intent(this, LoginActivity.class);
