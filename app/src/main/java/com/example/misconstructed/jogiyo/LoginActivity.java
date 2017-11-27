@@ -45,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
         login_button = (Button)findViewById(R.id.login_button);
     }
 
