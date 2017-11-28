@@ -1,13 +1,16 @@
 package com.example.misconstructed.jogiyo;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.misconstructed.jogiyo.VO.UserVo;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -18,7 +21,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,12 +36,14 @@ public class LoginActivity extends AppCompatActivity {
     private List<String> permissionNeeds = Arrays.asList("email");
     private Button facebook_login_button;
     private Button login_button;
-    private EditText emailText;
+    private EditText idText;
     private EditText passwordText;
-    private String email;
+    private String id;
     private String password;
 
-    private DatabaseReference database;
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference user_database = firebaseDatabase.getReference("User");
+    private DatabaseReference database = firebaseDatabase.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,17 +61,55 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(View v){
-        emailText = (EditText)findViewById(R.id.email);
+        idText = (EditText)findViewById(R.id.id);
         passwordText = (EditText)findViewById(R.id.password);
-        email = emailText.getText().toString();
+        id = idText.getText().toString();
         password = passwordText.getText().toString();
-        Log.i("ID", email);
-        Log.i("PW", password);
 
-        if(email.equals("test") && password.equals("test")){
-            Intent intent = new Intent(this, SidebarActivity.class);
-            startActivity(intent);
-        }
+        checkLogin(id, password);
+
+    }
+
+    private void checkLogin(final String id, final String password){
+        user_database.child(id).addValueEventListener(new ValueEventListener() {
+            boolean check = false;
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                try {
+                    UserVo user = dataSnapshot.getValue(UserVo.class);
+
+                    //email이 중복된 경우
+                    if(user == null){
+                        check = true;
+                        idText.setText("");
+                        passwordText.setText("");
+                        Toast.makeText(getApplicationContext(), "아이디가 존재하지 않습니다.", Toast.LENGTH_LONG).show();
+                    }
+                    else if(id.equals(user.getId()) && check == false) {
+                        if(!password.equals(user.getPassword())){
+                            passwordText.setText("");
+                            Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
+                        } else {
+                            startApp(id);
+                        }
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "오류", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
+        });
+    }
+
+    private void startApp(String id){
+        Intent intent = new Intent(this, SidebarActivity.class);
+        intent.putExtra("id", id);
+        startActivity(intent);
+        Toast.makeText(getApplicationContext(), "로그인 완료", Toast.LENGTH_LONG).show();
     }
 
     private void googleLogin(){
