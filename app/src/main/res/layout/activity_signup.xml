@@ -38,6 +38,16 @@
         android:layout_marginTop="20dp"
         android:layout_below="@+id/name"/>
 
+    <TextView
+        android:id="@+id/alert_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_toRightOf="@+id/emailtext"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/name"/>
+
     <EditText
         android:id="@+id/email"
         android:layout_width="wrap_content"
@@ -57,6 +67,16 @@
         android:layout_height="wrap_content"
         android:text="비밀번호"
         android:layout_alignLeft="@+id/password"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/email"/>
+
+    <TextView
+        android:id="@+id/alert_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/passwordtext"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/email"/>
 
