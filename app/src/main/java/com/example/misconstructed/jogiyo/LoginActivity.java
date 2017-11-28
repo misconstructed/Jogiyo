@@ -18,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordText;
     private String email;
     private String password;
+
+    private DatabaseReference database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         password = passwordText.getText().toString();
         Log.i("ID", email);
         Log.i("PW", password);
+
         if(email.equals("test") && password.equals("test")){
             Intent intent = new Intent(this, SidebarActivity.class);
             startActivity(intent);

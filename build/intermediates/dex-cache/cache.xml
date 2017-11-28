@@ -3,12 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="/Users/macpro/.android/build-cache/579cbceb831aeab5c3768eda3a83d9f1c62ccee3/output/jars/classes.jar"
+        jar="/Users/macpro/.android/build-cache/f6aa5657a010b4d550c6188f99509136f53164ef/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
-        revision="26.0.1"
-        sha1="869a1d15fa9d8e8aa36587b042f553c1baea46bc">
-        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_80a0b354686dddc83af5c8a3f8e5d5ae6c82c67d/classes.dex" />
+        revision="26.0.2"
+        sha1="b12cd9c87c3dfb012a911b6e38d2444ed0a65e1f">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7bbfcb2c0d767576d2f638eb9db36b0d9d7d95e2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/2f12055dceb41aa8cc7b3b6c7f64947e43ef0abb/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="2442771a5590dd4eb4bce00c2e9dca9e22e4c963">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_44e9c85f0efde3a724a76a28776320bd4dc72739/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -21,15 +30,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/macpro/.android/build-cache/b2bdc115831450bdaeee149c1a0250bcc916ed8a/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="e9b8fd995f9c6c2caeb49827f0b52e0e8cc621e0">
-        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c1814ea780b8628e5b33109734b6623122a3b594/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/macpro/.android/build-cache/1629e84cddc12a6d6c3809b57b6fc07c3b24b3ce/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -39,21 +39,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/macpro/.gradle/caches/modules-2/files-2.1/android.arch.lifecycle/common/1.0.0/e414a4cb28434e25c4f6aa71426eb20cf4874ae9/common-1.0.0.jar"
+        jar="/Users/macpro/.android/build-cache/ed574ccc5a2349bb2c94a83011947fabfa508b5a/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
-        revision="26.0.1"
-        sha1="e414a4cb28434e25c4f6aa71426eb20cf4874ae9">
-        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/common-1.0.0_ed8e7ab04595dc25f9c2d00717fb3c05ddb66525/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/macpro/.android/build-cache/cc772043dece807e09576c63fbb32bf1ca8257d2/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="f97cf85b0fe70d37a705111dafa6b1b418ea1650">
-        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d4e0d7c6476cc2c3a4cbd60a07eceb53363735d6/classes.dex" />
+        revision="26.0.2"
+        sha1="d90cb9610620b7631c75f1953a4956810edd4bed">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_70a7cd88ff5c72a65edcd9e3c7c014a8fbbac5fc/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -66,30 +57,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/macpro/.android/build-cache/e09ead0a61aed649931fd2462414a85f41a31c45/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="6f4138a4e065826cb044d49faea4cfd7191773d1">
-        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5b4c6a1a9cf53c5388f82bc383190bd4a1b52562/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
         sha1="3aec3a8cd69fcc6f9aa1eec43cd37a2e84ff9db7">
         <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_4337bf10ed39c52933a11bd650719ebe0dfeb1e7/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/macpro/.android/build-cache/fa34ac2ba80b656d9ea73c87bfa1cf9858dd3038/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="da443aff9cd3c2cd75b957e0547e1ca2c4f30308">
-        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5c1dff77dcd5f0a908443d45e1f11a7889db1cb0/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -102,12 +75,39 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/macpro/.android/build-cache/ed574ccc5a2349bb2c94a83011947fabfa508b5a/output/jars/classes.jar"
+        jar="/Users/macpro/.android/build-cache/015681106d94e012eb8553a1078b913a566c4615/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
-        revision="26.0.1"
-        sha1="d90cb9610620b7631c75f1953a4956810edd4bed">
-        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_70a7cd88ff5c72a65edcd9e3c7c014a8fbbac5fc/classes.dex" />
+        revision="26.0.2"
+        sha1="d6399340139f67ce4faba06e97f256ef0d6817c0">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d406d51cdc76682f8143039fe4c2df8fcf8afe7c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/e09ead0a61aed649931fd2462414a85f41a31c45/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="6f4138a4e065826cb044d49faea4cfd7191773d1">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5b4c6a1a9cf53c5388f82bc383190bd4a1b52562/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/Library/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.2/constraint-layout-solver-1.0.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/constraint-layout-solver-1.0.2_0fb1258eea1eb6a955b5e1291d8e2611dfa0a0e6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/fa34ac2ba80b656d9ea73c87bfa1cf9858dd3038/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="da443aff9cd3c2cd75b957e0547e1ca2c4f30308">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5c1dff77dcd5f0a908443d45e1f11a7889db1cb0/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -120,21 +120,21 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/macpro/.gradle/caches/modules-2/files-2.1/android.arch.core/common/1.0.0/a2d487452376193fc8c103dd2b9bd5f2b1b44563/common-1.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="a2d487452376193fc8c103dd2b9bd5f2b1b44563">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/common-1.0.0_42554190bd40be434d40694d60f42559860efde6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/macpro/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/26.1.0/814258103cf26a15fcc26ecce35f5b7d24b73f8/support-annotations-26.1.0.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
         sha1="0814258103cf26a15fcc26ecce35f5b7d24b73f8">
         <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-26.1.0_263843ea79deb5776c876120beec0a5ba7907456/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/macpro/.android/build-cache/65adfa89c4e676f0cae11619946622841baad11c/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="40392f30a601db5675cdf18192aab013d6fee6ec">
-        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e8cee75314fc282cc62fd2ea20d0dbbaf0a579bd/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -156,6 +156,24 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/42e6bcbaa80875f661d489872531f6c42d6d1ec5/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="863b37c463df79f340b5d83bbbfc63ad25612e01">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_770d018ac0f3c9a64d2a556b15bf23bea0196e86/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_c05efadceba286cdd7a231fde7a0ba80d0bb346c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/macpro/.gradle/caches/modules-2/files-2.1/android.arch.core/common/1.0.0/a2d487452376193fc8c103dd2b9bd5f2b1b44563/common-1.0.0.jar"
         jumboMode="true"
         optimize="true"
@@ -165,30 +183,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/macpro/.android/build-cache/2f12055dceb41aa8cc7b3b6c7f64947e43ef0abb/output/jars/classes.jar"
+        jar="/Users/macpro/.android/build-cache/579cbceb831aeab5c3768eda3a83d9f1c62ccee3/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
-        revision="26.0.1"
-        sha1="2442771a5590dd4eb4bce00c2e9dca9e22e4c963">
-        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_44e9c85f0efde3a724a76a28776320bd4dc72739/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/macpro/.android/build-cache/bc4d3483ff0f49f41706b56dbf403ba738350ac5/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_da4b7b217e0d3e9d9b49c86f1a6ccb226fa25bdd/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/macpro/.android/build-cache/37db0ba9e4654c954a043fe75ab1511469a8daab/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="269771e258a0d07bc8f5213f1f5ed77e8f42d72f">
-        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7c1d9352787d7a3f7590ec38149624b6ca43e85b/classes.dex" />
+        revision="26.0.2"
+        sha1="869a1d15fa9d8e8aa36587b042f553c1baea46bc">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_80a0b354686dddc83af5c8a3f8e5d5ae6c82c67d/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -198,6 +198,24 @@
         revision="26.0.1"
         sha1="44780c2cf98f6a3cf4e77f1234d644758b329201">
         <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/bolts-android-1.2.1_76d9a057bbf5094f05971c8d6136281795b6ffec/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/ed24c18810375cfa8b86810cb6991ec243fda67a/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="9c22269e1d6331aa1cc266ff8b1404a621b4896d">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ed1f1136a9e262100107897e6f856e40b06de2b7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/b0ee5093ff3cb4f0393a6df90acda39e472992c0/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="233f60a165ae622c8b36731502ebbda0f65e1930">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_1f78492f64f96323fbe114c5792d66275d42465d/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -219,6 +237,303 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/cc772043dece807e09576c63fbb32bf1ca8257d2/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="f97cf85b0fe70d37a705111dafa6b1b418ea1650">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d4e0d7c6476cc2c3a4cbd60a07eceb53363735d6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/37db0ba9e4654c954a043fe75ab1511469a8daab/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="269771e258a0d07bc8f5213f1f5ed77e8f42d72f">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7c1d9352787d7a3f7590ec38149624b6ca43e85b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/a7bc8059ee2bdadc8669dde246e368ae284767df/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="78ea232052df889856dcb7b7b542707c89bb3bfb">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_47ab65b7cbe95378fc1f7a64765d045e052acc52/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/b4540e2b5bdfe50fd8fd0d1e9759f7a151d87f6c/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="508f50705b4fde51a16259f29c854201a3044516">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_93f2bb04a9454d0321ef625dd0ed46854429bc3d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/015681106d94e012eb8553a1078b913a566c4615/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="d6399340139f67ce4faba06e97f256ef0d6817c0">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d406d51cdc76682f8143039fe4c2df8fcf8afe7c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/579cbceb831aeab5c3768eda3a83d9f1c62ccee3/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="869a1d15fa9d8e8aa36587b042f553c1baea46bc">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_80a0b354686dddc83af5c8a3f8e5d5ae6c82c67d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/b2bdc115831450bdaeee149c1a0250bcc916ed8a/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="e9b8fd995f9c6c2caeb49827f0b52e0e8cc621e0">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c1814ea780b8628e5b33109734b6623122a3b594/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/bc4d3483ff0f49f41706b56dbf403ba738350ac5/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_da4b7b217e0d3e9d9b49c86f1a6ccb226fa25bdd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.gradle/caches/modules-2/files-2.1/android.arch.lifecycle/common/1.0.0/e414a4cb28434e25c4f6aa71426eb20cf4874ae9/common-1.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="e414a4cb28434e25c4f6aa71426eb20cf4874ae9">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/common-1.0.0_ed8e7ab04595dc25f9c2d00717fb3c05ddb66525/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/d52885df2490fe613e7989a60cea85b5ce33d144/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="7efef32744ca4a436492d5cf28c08698cc2af256">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_12576ee8e9e69f75ac276845abc015dc7911216d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/cc772043dece807e09576c63fbb32bf1ca8257d2/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="f97cf85b0fe70d37a705111dafa6b1b418ea1650">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d4e0d7c6476cc2c3a4cbd60a07eceb53363735d6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/e09ead0a61aed649931fd2462414a85f41a31c45/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="6f4138a4e065826cb044d49faea4cfd7191773d1">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5b4c6a1a9cf53c5388f82bc383190bd4a1b52562/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.1/44780c2cf98f6a3cf4e77f1234d644758b329201/bolts-android-1.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="44780c2cf98f6a3cf4e77f1234d644758b329201">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/bolts-android-1.2.1_76d9a057bbf5094f05971c8d6136281795b6ffec/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/aeef8127d861f9dbb2ced3c57e4785450628cd68/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="58b12bdb21a84f22e0dc3b047aeceb0a546b1b44">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8dbc7456e961f9f9482112771e921ccb4e81eb51/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/192647383b2c07f6b9ceed3380da2c029eb0d578/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d6ff091e2c6df07894e5b921671404047d70d3f7">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_80895a9957ebb4e52c9d3198435150d8149a9be0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/fa34ac2ba80b656d9ea73c87bfa1cf9858dd3038/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="da443aff9cd3c2cd75b957e0547e1ca2c4f30308">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5c1dff77dcd5f0a908443d45e1f11a7889db1cb0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/06132f7de2c27d962a884ddfcdcd64857cd412d8/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="cd1ff651ddb8608e9c4037f3d9ab475e9472abb2">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_81e3240b2cad4f8cc5766c36cd66a634b5d73579/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/d5b79b94c5cae8fb895fe8162a7a65d2d9601780/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="bff7bd70e4906aa2d9190e56461758be064e477d">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_76e442dfa91e3e84136820d86e3a45782c2cf153/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/242596e4b6fbb674fb1b7af551d27079c72518dd/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="7679607a53988c76b23575d3e2bd473951773f29">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3b344ccd3975a6f32db54ce846da63dc3c431b23/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="ebe75af7c5181e56e8b4283d0209bc652083ea48">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_4337bf10ed39c52933a11bd650719ebe0dfeb1e7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/ed574ccc5a2349bb2c94a83011947fabfa508b5a/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="d90cb9610620b7631c75f1953a4956810edd4bed">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_70a7cd88ff5c72a65edcd9e3c7c014a8fbbac5fc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/274202b82e46b94cc20fba1011e870d73a5677e1/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b62fdc4cfef174c1e456014195c83fa7de7dc041">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0ac2ee8fad23ca760113ac617e3c40e6c23f7a91/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/d2b78ed3569f88038787aeda70b58c4b0df959d1/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="a37fc31c5ceeaa4532a37358add1b189d8db4af1">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d33fe74405b437b748915ed2014303f13c5f142c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/65adfa89c4e676f0cae11619946622841baad11c/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="40392f30a601db5675cdf18192aab013d6fee6ec">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e8cee75314fc282cc62fd2ea20d0dbbaf0a579bd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/a26b18bbf6794681860aea0b463db55ae3b43e94/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="1cde19cbf9be88547ab4b7f03668eac5d91bd611">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_89812f203e436cd3513f2ae5c1c46b95d267778f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/26.1.0/814258103cf26a15fcc26ecce35f5b7d24b73f8/support-annotations-26.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="0814258103cf26a15fcc26ecce35f5b7d24b73f8">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-26.1.0_263843ea79deb5776c876120beec0a5ba7907456/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.gradle/caches/modules-2/files-2.1/android.arch.lifecycle/common/1.0.0/e414a4cb28434e25c4f6aa71426eb20cf4874ae9/common-1.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e414a4cb28434e25c4f6aa71426eb20cf4874ae9">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/common-1.0.0_ed8e7ab04595dc25f9c2d00717fb3c05ddb66525/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/1629e84cddc12a6d6c3809b57b6fc07c3b24b3ce/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="f428e2fbc9ed0b297e3a3f420e51e6982f66822d">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0d3cb067caa902c14c7b6736d52ea7108f5d375a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/2f12055dceb41aa8cc7b3b6c7f64947e43ef0abb/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="2442771a5590dd4eb4bce00c2e9dca9e22e4c963">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_44e9c85f0efde3a724a76a28776320bd4dc72739/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/b2bdc115831450bdaeee149c1a0250bcc916ed8a/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e9b8fd995f9c6c2caeb49827f0b52e0e8cc621e0">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c1814ea780b8628e5b33109734b6623122a3b594/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/f2ce0c2c4484892873be746586d295e6828cfb4c/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_300719a8552cb292587cb4f248f75a8823dcaa0a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/bc4d3483ff0f49f41706b56dbf403ba738350ac5/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_da4b7b217e0d3e9d9b49c86f1a6ccb226fa25bdd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/37db0ba9e4654c954a043fe75ab1511469a8daab/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="269771e258a0d07bc8f5213f1f5ed77e8f42d72f">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7c1d9352787d7a3f7590ec38149624b6ca43e85b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/macpro/.android/build-cache/274202b82e46b94cc20fba1011e870d73a5677e1/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -237,12 +552,30 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/65adfa89c4e676f0cae11619946622841baad11c/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="40392f30a601db5675cdf18192aab013d6fee6ec">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e8cee75314fc282cc62fd2ea20d0dbbaf0a579bd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/macpro/.android/build-cache/242596e4b6fbb674fb1b7af551d27079c72518dd/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
         sha1="7679607a53988c76b23575d3e2bd473951773f29">
         <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3b344ccd3975a6f32db54ce846da63dc3c431b23/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/3bbfdc35b817498171b868948ee9849da734780f/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e4a9d8510de319af17459d3ec70e23559b83495b">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b82fbebc3bf212ef7825a08bfd964d32f01028c5/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -273,12 +606,21 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/macpro/.android/build-cache/015681106d94e012eb8553a1078b913a566c4615/output/jars/classes.jar"
+        jar="/Users/macpro/.android/build-cache/ed70d8f4a0c4030b3bb461054e89e0b45569bf4a/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
-        revision="26.0.1"
-        sha1="d6399340139f67ce4faba06e97f256ef0d6817c0">
-        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d406d51cdc76682f8143039fe4c2df8fcf8afe7c/classes.dex" />
+        revision="26.0.2"
+        sha1="729a6a1975c19d7461378172c7932f5c57f1c3fe">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_424aa76b588f4c277fc36d8d6d28c1f2147e44a4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/macpro/.android/build-cache/46454290de3c02c283e23159385c2033ce3198b8/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="47bcd0b3eac50dbe2f150987250a6507e10ef28a">
+        <dex dex="/Users/macpro/AndroidStudioProjects/Jogiyo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c87c570c88cfab4f22bb03e2fe6931521150229a/classes.dex" />
     </item>
 
 </items>

@@ -1,7 +1,9 @@
 {
   "project_info": {
     "project_number": "718022107663",
-    "project_id": "firebase-jogiyo"
+    "firebase_url": "https://fir-jogiyo.firebaseio.com",
+    "project_id": "firebase-jogiyo",
+    "storage_bucket": "firebase-jogiyo.appspot.com"
   },
   "client": [
     {
@@ -12,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "718022107663-bp0l2h9pb2jcb57ckvgo1ov1h7652ntc.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "718022107663-r3llpceo652he982nn2j0ltmo0apdcpu.apps.googleusercontent.com",
+          "client_type": 3
+        },
         {
           "client_id": "718022107663-npqd84f6nu8qv092rb2hmo8qgi026chs.apps.googleusercontent.com",
           "client_type": 1,
@@ -35,11 +45,16 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "718022107663-bp0l2h9pb2jcb57ckvgo1ov1h7652ntc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

@@ -103,6 +103,7 @@
         android:background="@drawable/round_button"
         android:textColor="@color/background"
         android:text="Sign Up"
+        android:onClick="signup_data"
         android:textSize="20sp"
         android:layout_below="@+id/passwordConfirm"
         android:layout_centerHorizontal="true" />
