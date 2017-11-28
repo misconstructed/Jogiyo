@@ -2,6 +2,8 @@ package com.example.misconstructed.jogiyo;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,11 +47,18 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference user_database = firebaseDatabase.getReference("User");
     private DatabaseReference database = firebaseDatabase.getReference();
 
+    private Handler handler;
+    private Message message;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_login);
+
+        handler = new Handler();
+
         facebookLogin();
         googleLogin();
         findViewById(R.id.google_login_button).setOnClickListener(new View.OnClickListener() {
@@ -60,16 +69,16 @@ public class LoginActivity extends AppCompatActivity {
         login_button = (Button)findViewById(R.id.login_button);
     }
 
-    public void login(View v){
-        idText = (EditText)findViewById(R.id.id);
-        passwordText = (EditText)findViewById(R.id.password);
+    //로그인 onclick
+    public void login(View v) {
+        idText = (EditText) findViewById(R.id.id);
+        passwordText = (EditText) findViewById(R.id.password);
         id = idText.getText().toString();
         password = passwordText.getText().toString();
-
         checkLogin(id, password);
-
     }
 
+    //로그인 유효한지 확인
     private void checkLogin(final String id, final String password){
         user_database.child(id).addValueEventListener(new ValueEventListener() {
             boolean check = false;
@@ -80,17 +89,17 @@ public class LoginActivity extends AppCompatActivity {
 
                     //email이 중복된 경우
                     if(user == null){
-                        check = true;
-                        idText.setText("");
-                        passwordText.setText("");
-                        Toast.makeText(getApplicationContext(), "아이디가 존재하지 않습니다.", Toast.LENGTH_LONG).show();
+                                check = true;
+                                idText.setText("");
+                                passwordText.setText("");
+                                Toast.makeText(getApplicationContext(), "아이디가 존재하지 않습니다.", Toast.LENGTH_LONG).show();
                     }
                     else if(id.equals(user.getId()) && check == false) {
                         if(!password.equals(user.getPassword())){
                             passwordText.setText("");
                             Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
                         } else {
-                            startApp(id);
+                            startApp(user);
                         }
                     }
                 }catch (Exception e){
@@ -105,11 +114,18 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void startApp(String id){
+    //로그인 진행 앱 첫 화면으로 이동
+    private void startApp(UserVo user){
         Intent intent = new Intent(this, SidebarActivity.class);
-        intent.putExtra("id", id);
+        intent.putExtra("user", user);
         startActivity(intent);
         Toast.makeText(getApplicationContext(), "로그인 완료", Toast.LENGTH_LONG).show();
+    }
+
+    //회원가입 화면으로 넘어감
+    public void signup(View v){
+        Intent intent = new Intent(this, SignupActivity.class);
+        startActivity(intent);
     }
 
     private void googleLogin(){
@@ -162,11 +178,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
-
-    public void signup(View v){
-        Intent intent = new Intent(this, SignupActivity.class);
-        startActivity(intent);
     }
 }
 

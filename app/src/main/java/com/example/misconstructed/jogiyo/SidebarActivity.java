@@ -15,10 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.misconstructed.jogiyo.VO.UserVo;
 
 import java.util.ArrayList;
 
@@ -30,11 +33,25 @@ public class SidebarActivity extends AppCompatActivity
     private RelativeLayout preferences;
     private TextView label;
     private FloatingActionButton add;
+    private UserVo user;
+    private String name;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_sidebar);
+        Intent intent = getIntent();
+        user = intent.getParcelableExtra("user");
+        if(user == null)
+            Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
+        else {
+            Toast.makeText(getApplicationContext(), user.getUser_name() + user.getPassword() + user.getId(), Toast.LENGTH_LONG).show();
+            name = user.getUser_name();
+            id = user.getId();
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         ListView listView = (ListView) findViewById(R.id.listView);
         toolbar.setTitle("");
@@ -47,6 +64,7 @@ public class SidebarActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        setNavHeader(name, id, navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
         mymap = (ConstraintLayout)findViewById(R.id.mymap);
@@ -70,6 +88,17 @@ public class SidebarActivity extends AppCompatActivity
         preferences.setVisibility(View.INVISIBLE);
         label=(TextView)findViewById(R.id.title);
         add=(FloatingActionButton)findViewById(R.id.add);
+    }
+
+    private void setNavHeader(String name, String id, View navigationView){
+        View nav_header = (View)navigationView.findViewById(R.id.nav_header);
+        TextView nav_header_id = (TextView)findViewById(R.id.nav_id);
+        if(nav_header_id == null)
+            Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(getApplicationContext(), name + id, Toast.LENGTH_LONG).show();
+        //nav_header_id.
+
     }
 
     @Override
