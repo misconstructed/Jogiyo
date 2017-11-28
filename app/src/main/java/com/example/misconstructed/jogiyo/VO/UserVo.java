@@ -6,17 +6,17 @@ package com.example.misconstructed.jogiyo.VO;
 
 public class UserVo {
     private String user_name;
-    private String email;
+    private String id;
     private String password;
 
     public UserVo(){
         this.user_name = null;
-        this.email = null;
+        this.id = null;
         this.password = null;
     }
     public UserVo(String user_name, String email, String password){
         this.user_name = user_name;
-        this.email = email;
+        this.id = email;
         this.password = password;
     }
 
@@ -24,12 +24,12 @@ public class UserVo {
         return user_name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getId() {
+        return id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setId(String email) {
+        this.id = email;
     }
 
     public String getPassword() {
@@ -48,7 +48,7 @@ public class UserVo {
     public String toString() {
         return "UserVo{" +
                 "user_name='" + user_name + '\'' +
-                ", email='" + email + '\'' +
+                ", email='" + id + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
