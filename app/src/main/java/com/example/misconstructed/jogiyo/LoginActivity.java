@@ -1,7 +1,6 @@
 package com.example.misconstructed.jogiyo;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -116,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //로그인 진행 앱 첫 화면으로 이동
     private void startApp(UserVo user){
-        Intent intent = new Intent(this, SidebarActivity.class);
+        Intent intent = new Intent(this, MyMapActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
         Toast.makeText(getApplicationContext(), "로그인 완료", Toast.LENGTH_LONG).show();

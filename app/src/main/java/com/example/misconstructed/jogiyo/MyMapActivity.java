@@ -1,19 +1,19 @@
 package com.example.misconstructed.jogiyo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -25,14 +25,10 @@ import com.example.misconstructed.jogiyo.VO.UserVo;
 
 import java.util.ArrayList;
 
-public class SidebarActivity extends AppCompatActivity
+public class MyMapActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ConstraintLayout mymap;
-    private RelativeLayout checkin;
-    private RelativeLayout preferences;
     private TextView label;
-    private FloatingActionButton add;
     private UserVo user;
     private String name;
     private String id;
@@ -40,16 +36,14 @@ public class SidebarActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my_map);
 
-        setContentView(R.layout.activity_sidebar);
         Intent intent = getIntent();
         user = intent.getParcelableExtra("user");
         if(user == null)
             Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
         else {
             Toast.makeText(getApplicationContext(), user.getUser_name() + user.getPassword() + user.getId(), Toast.LENGTH_LONG).show();
-            name = user.getUser_name();
-            id = user.getId();
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -64,36 +58,28 @@ public class SidebarActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        setNavHeader(name, id, navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mymap = (ConstraintLayout)findViewById(R.id.mymap);
-        checkin = (RelativeLayout)findViewById(R.id.checkin);
-
-        final ListItemAdapter adapter = new ListItemAdapter();
-        adapter.addItem(new ListItem("해파리 낚시","12시 00분",true,false));
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                ListItem item = (ListItem) adapter.getItem(position);
-                Toast.makeText(getApplicationContext(), "선택 : " + item.getName(),
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-
-        preferences = (RelativeLayout) findViewById(R.id.preferences);
-        mymap.setVisibility(View.VISIBLE);
-        checkin.setVisibility(View.INVISIBLE);
-        preferences.setVisibility(View.INVISIBLE);
         label=(TextView)findViewById(R.id.title);
-        add=(FloatingActionButton)findViewById(R.id.add);
+
+        setView(user);
+    }
+
+    //첫 화면이니깐 my map이 보여야함
+    private void setView(UserVo user){
+        ConstraintLayout my_map = (ConstraintLayout)findViewById(R.id.my_map);
+        RelativeLayout check_in = (RelativeLayout)findViewById(R.id.check_in);
+        RelativeLayout preferences = (RelativeLayout)findViewById(R.id.preferences);
+
+        my_map.setVisibility(View.VISIBLE);
+        check_in.setVisibility(View.GONE);
+        preferences.setVisibility(View.GONE);
     }
 
     private void setNavHeader(String name, String id, View navigationView){
-        View nav_header = (View)navigationView.findViewById(R.id.nav_header);
+        View nav_header = (View)findViewById(R.id.nav_header);
         TextView nav_header_id = (TextView)findViewById(R.id.nav_id);
-        if(nav_header_id == null)
+        if(nav_header == null)
             Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
         else
             Toast.makeText(getApplicationContext(), name + id, Toast.LENGTH_LONG).show();
@@ -111,51 +97,45 @@ public class SidebarActivity extends AppCompatActivity
         }
     }
 
+    //사이드바 메뉴 선택 시 동작 설정
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        mymap = (ConstraintLayout)findViewById(R.id.mymap);
-        checkin = (RelativeLayout)findViewById(R.id.checkin);
-        preferences = (RelativeLayout) findViewById(R.id.preferences);
-
         Intent intent = null;
         if (id == R.id.mymap_menu) {
-            // Handle the camera action
-            Toast.makeText(getApplicationContext(), "My Map", Toast.LENGTH_LONG).show();
-            mymap.setVisibility(View.VISIBLE);
-            checkin.setVisibility(View.INVISIBLE);
-            preferences.setVisibility(View.INVISIBLE);
+            intent = new Intent(this, MyMapActivity.class);
             label.setText("My Map");
-            add.setVisibility(View.VISIBLE);
         } else if (id == R.id.checkin_menu) {
             Toast.makeText(getApplicationContext(), "Check In", Toast.LENGTH_LONG).show();
-            mymap.setVisibility(View.INVISIBLE);
-            checkin.setVisibility(View.VISIBLE);
-            preferences.setVisibility(View.INVISIBLE);
+            intent = new Intent(this, CheckInActivity.class);
             label.setText("Check In");
-            add.setVisibility(View.VISIBLE);
         } else if (id == R.id.preferences_menu) {
             Toast.makeText(getApplicationContext(), "Preferences", Toast.LENGTH_LONG).show();
-            mymap.setVisibility(View.INVISIBLE);
-            checkin.setVisibility(View.INVISIBLE);
-            preferences.setVisibility(View.VISIBLE);
+            intent = new Intent(this, PreferencesActivity.class);
             label.setText("Preferences");
-            add.setVisibility(View.INVISIBLE);
         } else if (id == R.id.logout_menu) {
             Toast.makeText(getApplicationContext(), "Log Out", Toast.LENGTH_LONG).show();
             intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
         }
-
+        intent.putExtra("user", user);
+        startActivity(intent);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
     }
+
+
+
+
+
+
+
+
 
     private class ListItemAdapter extends BaseAdapter{
 
