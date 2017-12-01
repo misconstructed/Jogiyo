@@ -42,9 +42,7 @@ public class MyMapActivity extends AppCompatActivity
         user = intent.getParcelableExtra("user");
         if(user == null)
             Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
-        else {
-            Toast.makeText(getApplicationContext(), user.getUser_name() + user.getPassword() + user.getId(), Toast.LENGTH_LONG).show();
-        }
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         ListView listView = (ListView) findViewById(R.id.listView);
@@ -61,7 +59,7 @@ public class MyMapActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         label=(TextView)findViewById(R.id.title);
-
+        label.setText("My Map");
         setView(user);
     }
 
@@ -76,16 +74,6 @@ public class MyMapActivity extends AppCompatActivity
         preferences.setVisibility(View.GONE);
     }
 
-    private void setNavHeader(String name, String id, View navigationView){
-        View nav_header = (View)findViewById(R.id.nav_header);
-        TextView nav_header_id = (TextView)findViewById(R.id.nav_id);
-        if(nav_header == null)
-            Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
-        else
-            Toast.makeText(getApplicationContext(), name + id, Toast.LENGTH_LONG).show();
-        //nav_header_id.
-
-    }
 
     @Override
     public void onBackPressed() {
@@ -107,15 +95,12 @@ public class MyMapActivity extends AppCompatActivity
         Intent intent = null;
         if (id == R.id.mymap_menu) {
             intent = new Intent(this, MyMapActivity.class);
-            label.setText("My Map");
         } else if (id == R.id.checkin_menu) {
             Toast.makeText(getApplicationContext(), "Check In", Toast.LENGTH_LONG).show();
             intent = new Intent(this, CheckInActivity.class);
-            label.setText("Check In");
         } else if (id == R.id.preferences_menu) {
             Toast.makeText(getApplicationContext(), "Preferences", Toast.LENGTH_LONG).show();
             intent = new Intent(this, PreferencesActivity.class);
-            label.setText("Preferences");
         } else if (id == R.id.logout_menu) {
             Toast.makeText(getApplicationContext(), "Log Out", Toast.LENGTH_LONG).show();
             intent = new Intent(this, LoginActivity.class);

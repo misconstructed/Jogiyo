@@ -91,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
                                 check = true;
                                 idText.setText("");
                                 passwordText.setText("");
-                                Toast.makeText(getApplicationContext(), "아이디가 존재하지 않습니다.", Toast.LENGTH_LONG).show();
                     }
                     else if(id.equals(user.getId()) && check == false) {
                         if(!password.equals(user.getPassword())){
@@ -103,7 +102,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }catch (Exception e){
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "오류", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -118,7 +116,6 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MyMapActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), "로그인 완료", Toast.LENGTH_LONG).show();
     }
 
     //회원가입 화면으로 넘어감

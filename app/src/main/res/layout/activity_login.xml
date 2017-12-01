@@ -59,6 +59,7 @@
         android:layout_below="@+id/login_button"
         android:layout_alignLeft="@+id/login_button"
         android:layout_marginTop="3dp"
+        android:textColor="@color/background"
         android:textSize="17dp"
         android:text="Don't have an account?" />
 
@@ -94,8 +95,5 @@
         android:layout_below="@+id/facebook_login_button"
         android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"/>
-
-
-
 
 </RelativeLayout>
