@@ -3,6 +3,7 @@
     package="com.example.misconstructed.jogiyo">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -10,6 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBgU2WtdtNbRq30Dm3CkYVCs7GvcAm3Jwg" />
+
         <activity
             android:name=".StartActivity"
             android:theme="@style/AppTheme"
@@ -48,6 +54,9 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_id" />
 
+        <activity
+            android:name=".AddActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
             android:name=".PreferencesActivity"

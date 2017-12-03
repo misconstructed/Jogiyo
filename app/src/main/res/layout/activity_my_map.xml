@@ -24,6 +24,8 @@
         app:menu="@menu/activity_drawer" />
 
 
+
+
 </android.support.v4.widget.DrawerLayout>
 
 <!-- navigationView 사이드바 아래 아이템 부분 -->

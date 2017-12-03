@@ -1,21 +1,19 @@
 package com.example.misconstructed.jogiyo;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,6 +26,7 @@ import java.util.ArrayList;
 public class CheckInActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private FloatingActionButton add;
     private TextView label;
     private UserVo user;
     private String name;
@@ -43,7 +42,9 @@ public class CheckInActivity extends AppCompatActivity
         user = intent.getParcelableExtra("user");
         if(user == null)
             Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
-
+        else {
+            Toast.makeText(getApplicationContext(), user.getUser_name() + user.getPassword() + user.getId(), Toast.LENGTH_LONG).show();
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         ListView listView = (ListView) findViewById(R.id.listView);
@@ -61,6 +62,15 @@ public class CheckInActivity extends AppCompatActivity
 
         label=(TextView)findViewById(R.id.title);
         label.setText("Check In");
+        add=(FloatingActionButton)findViewById(R.id.add);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),AddActivity.class);
+                startActivity(intent);
+            }
+        });
+        add.setVisibility(View.VISIBLE);
 
         setView(user);
     }
@@ -76,6 +86,16 @@ public class CheckInActivity extends AppCompatActivity
         preferences.setVisibility(View.GONE);
     }
 
+    private void setNavHeader(String name, String id, View navigationView){
+        View nav_header = (View)findViewById(R.id.nav_header);
+        TextView nav_header_id = (TextView)findViewById(R.id.nav_id);
+        if(nav_header == null)
+            Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(getApplicationContext(), name + id, Toast.LENGTH_LONG).show();
+        //nav_header_id.
+
+    }
 
     @Override
     public void onBackPressed() {
@@ -97,12 +117,15 @@ public class CheckInActivity extends AppCompatActivity
         Intent intent = null;
         if (id == R.id.mymap_menu) {
             intent = new Intent(this, MyMapActivity.class);
+            label.setText("My Map");
         } else if (id == R.id.checkin_menu) {
             Toast.makeText(getApplicationContext(), "Check In", Toast.LENGTH_LONG).show();
             intent = new Intent(this, CheckInActivity.class);
+            label.setText("Check In");
         } else if (id == R.id.preferences_menu) {
             Toast.makeText(getApplicationContext(), "Preferences", Toast.LENGTH_LONG).show();
             intent = new Intent(this, PreferencesActivity.class);
+            label.setText("Preferences");
         } else if (id == R.id.logout_menu) {
             Toast.makeText(getApplicationContext(), "Log Out", Toast.LENGTH_LONG).show();
             intent = new Intent(this, LoginActivity.class);
