@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    tools:context="com.example.misconstructed.jogiyo.AddActivity">
+
+    <GridView
+        android:id="@+id/chooseView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#FCFCFC"
+        android:numColumns="2">
+    </GridView>
+
+    <ImageView
+        android:id="@+id/titleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_below="@id/chooseView"
+        android:layout_alignParentLeft="true"
+        android:padding="15dp"
+        app:srcCompat="@drawable/ic_title_black_24dp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/titleView"
+        android:layout_alignBottom="@id/titleView"
+        android:paddingRight="15dp">
+        <EditText
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="제목"
+            android:inputType="text"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/timeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/titleView"
+        android:padding="15dp"
+        app:srcCompat="@drawable/ic_schedule_black_24dp"/>
+    <LinearLayout
+        android:id="@+id/timeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/timeView"
+        android:layout_alignBottom="@id/timeView"
+        android:paddingRight="15dp">
+        <EditText
+            android:id="@+id/time1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="날짜"
+            android:onClick="mDateOnClick"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/time2"
+        android:layout_alignRight="@id/timeLayout"
+        android:layout_below="@id/timeView"
+        android:layout_toRightOf="@id/timeView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:hint="시간"
+        android:onClick="mTimeOnClick" />
+
+
+    <ImageView
+        android:id="@+id/detailView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/time2"
+        android:padding="15dp"
+        app:srcCompat="@drawable/ic_assignment_black_24dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/detailView"
+        android:layout_alignBottom="@id/detailView"
+        android:paddingRight="15dp">
+        <EditText
+            android:id="@+id/detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="내용"
+            android:inputType="text"/>
+    </LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>
