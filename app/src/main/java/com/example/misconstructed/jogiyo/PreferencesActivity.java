@@ -1,6 +1,7 @@
 package com.example.misconstructed.jogiyo;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -14,23 +15,33 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.misconstructed.jogiyo.VO.UserVo;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 public class PreferencesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private FloatingActionButton add;
     private TextView label;
     private UserVo user;
-    private String name;
-    private String id;
+    private EditText nametext;
+    private EditText idtext;
+    private EditText newpasswordtext;
+    private EditText newpasswordconfirmtext;
+    private EditText passwordtext;
+
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference user_database = firebaseDatabase.getReference("User");
+    private DatabaseReference database = firebaseDatabase.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +53,7 @@ public class PreferencesActivity extends AppCompatActivity
         user = intent.getParcelableExtra("user");
         if(user == null)
             Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
-        else {
-            Toast.makeText(getApplicationContext(), user.getUser_name() + user.getPassword() + user.getId(), Toast.LENGTH_LONG).show();
-            name = user.getUser_name();
-            id = user.getId();
-        }
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         ListView listView = (ListView) findViewById(R.id.listView);
@@ -60,39 +67,106 @@ public class PreferencesActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        //setNavHeader(name, id, navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
-        label=(TextView)findViewById(R.id.title);
-        label.setText("Preferences");
-        add=(FloatingActionButton)findViewById(R.id.add);
-        add.setVisibility(View.INVISIBLE);
-        TextView tmp = (TextView)findViewById(R.id.nametext);
-        tmp.setText("BMMMMMMMMM");
         setView(user);
+        preferencesControl(user);
     }
+
+    private void preferencesControl(UserVo user){
+        nametext = (EditText)findViewById(R.id.name);
+        idtext= (EditText)findViewById(R.id.id);
+        nametext.setText(user.getUser_name());
+        idtext.setText(user.getId());
+    }
+
+    public void saveChanges(View v){
+        TextView alert_name = (TextView)findViewById(R.id.alert_name);
+        TextView alert_newpassword = (TextView)findViewById(R.id.alert_newpassword);
+        TextView alert_newpasswordconfirm = (TextView)findViewById(R.id.alert_newpasswordconfirm);
+        TextView alert_password = (TextView)findViewById(R.id.alert_password);
+
+        nametext = (EditText)findViewById(R.id.name);
+        newpasswordtext= (EditText)findViewById(R.id.newPassword);
+        newpasswordconfirmtext= (EditText)findViewById(R.id.newPasswordConfirm);
+        passwordtext= (EditText)findViewById(R.id.password);
+
+        String name = nametext.getText().toString();
+        String password = passwordtext.getText().toString();
+        String newpassword = newpasswordtext.getText().toString();
+        String newpasswordconfirm = newpasswordconfirmtext.getText().toString();
+
+        //정상적으로 수정 진행
+        if(password.equals(user.getPassword())){
+            //이름 입력 안한 경우
+            if(name.length() <= 0){
+                alert_name.setText("이름을 입력하세요.");
+                alert_newpassword.setText("");
+                alert_newpasswordconfirm.setText("");
+                alert_password.setText("");
+                alert_name.setTextColor(Color.RED);
+            } else {
+                //새 비밀번호 입력X
+                if (newpassword.length() <= 0 && newpasswordconfirm.length() <= 0) {
+                    user.setUser_name(name);
+                    database.child("User").child(user.getId()).setValue(user);
+                    Intent intent = new Intent(this, PreferencesActivity.class);
+                    intent.putExtra("user", user);
+                    startActivity(intent);
+
+                    Toast.makeText(getApplicationContext(), "회원정보를 수정했습니다", Toast.LENGTH_LONG).show();
+                } else {
+                    //비밀번호까지 바꾼 경우
+                    //새 비밀번호 일치
+                    if (newpassword.equals(newpasswordconfirm)) {
+                        user.setUser_name(name);
+                        user.setPassword(newpassword);
+                        database.child("User").child(user.getId()).setValue(user);
+                        Intent intent = new Intent(this, PreferencesActivity.class);
+                        intent.putExtra("user", user);
+                        startActivity(intent);
+                        alert_name.setText("");
+                        alert_newpassword.setText("");
+                        alert_newpasswordconfirm.setText("");
+                        alert_password.setText("");
+                        passwordtext.setText("");
+                        newpasswordtext.setText("");
+                        newpasswordconfirmtext.setText("");
+                        Toast.makeText(getApplicationContext(), "회원정보를 수정했습니다", Toast.LENGTH_LONG).show();
+                    } else {
+                        //새 비밀번호 불일치
+                        alert_name.setText("");
+                        alert_newpassword.setText("새 비밀번호가 일치하지 않습니다");
+                        alert_newpasswordconfirm.setText("");
+                        alert_password.setText("");
+                        alert_newpassword.setTextColor(Color.RED);
+                    }
+                }
+            }
+        } else {
+            //기존 비밀번호 불일치 - 진행X
+            alert_name.setText("");
+            alert_newpassword.setText("");
+            alert_newpasswordconfirm.setText("");
+            alert_password.setText("비밀번호가 일치하지 않습니다");
+            alert_password.setTextColor(Color.RED);
+        }
+    }
+
     //첫 화면이니깐 preferences가 보여야함
     private void setView(UserVo user){
-        ConstraintLayout my_map = (ConstraintLayout)findViewById(R.id.my_map);
+        LinearLayout my_map = (LinearLayout)findViewById(R.id.my_map);
         RelativeLayout check_in = (RelativeLayout)findViewById(R.id.check_in);
         RelativeLayout preferences = (RelativeLayout)findViewById(R.id.preferences);
+        LinearLayout check_in_detail = (LinearLayout)findViewById(R.id.check_in_detail);
+        LinearLayout add = (LinearLayout)findViewById(R.id.add);
 
         my_map.setVisibility(View.GONE);
         check_in.setVisibility(View.GONE);
         preferences.setVisibility(View.VISIBLE);
+        check_in_detail.setVisibility(View.GONE);
+        add.setVisibility(View.GONE);
     }
-
-    private void setNavHeader(String name, String id, View navigationView){
-        View nav_header = (View)findViewById(R.id.nav_header);
-        TextView nav_header_id = (TextView)findViewById(R.id.nav_id);
-        if(nav_header == null)
-            Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
-        else
-            Toast.makeText(getApplicationContext(), name + id, Toast.LENGTH_LONG).show();
-        //nav_header_id.
-
-    }
-
 
 
     @Override
@@ -115,17 +189,14 @@ public class PreferencesActivity extends AppCompatActivity
         Intent intent = null;
         if (id == R.id.mymap_menu) {
             intent = new Intent(this, MyMapActivity.class);
-            label.setText("My Map");
         } else if (id == R.id.checkin_menu) {
-            Toast.makeText(getApplicationContext(), "Check In", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Check In", Toast.LENGTH_LONG).show();
             intent = new Intent(this, CheckInActivity.class);
-            label.setText("Check In");
         } else if (id == R.id.preferences_menu) {
-            Toast.makeText(getApplicationContext(), "Preferences", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Preferences", Toast.LENGTH_LONG).show();
             intent = new Intent(this, PreferencesActivity.class);
-            label.setText("Preferences");
         } else if (id == R.id.logout_menu) {
-            Toast.makeText(getApplicationContext(), "Log Out", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Log Out", Toast.LENGTH_LONG).show();
             intent = new Intent(this, LoginActivity.class);
         }
         intent.putExtra("user", user);
@@ -133,7 +204,6 @@ public class PreferencesActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-
         return true;
     }
 

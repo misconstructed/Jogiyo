@@ -1,8 +1,9 @@
 package com.example.misconstructed.jogiyo;
 
+
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -21,23 +23,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.misconstructed.jogiyo.VO.UserVo;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 
 import java.util.ArrayList;
 
-public class CheckInActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class CheckInDetailActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     private FloatingActionButton add;
     private TextView label;
     private UserVo user;
-    private String name;
-    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
+                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_my_map);
-
 
         Intent intent = getIntent();
         user = intent.getParcelableExtra("user");
@@ -59,10 +65,13 @@ public class CheckInActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        label=(TextView)findViewById(R.id.title);
-        label.setText("Check In");
 
         setView(user);
+    }
+
+    public void test(View v){
+
+
     }
 
     //첫 화면이니깐 my map이 보여야함
@@ -74,9 +83,9 @@ public class CheckInActivity extends AppCompatActivity
         LinearLayout add = (LinearLayout)findViewById(R.id.add);
 
         my_map.setVisibility(View.GONE);
-        check_in.setVisibility(View.VISIBLE);
+        check_in.setVisibility(View.GONE);
         preferences.setVisibility(View.GONE);
-        check_in_detail.setVisibility(View.GONE);
+        check_in_detail.setVisibility(View.VISIBLE);
         add.setVisibility(View.GONE);
     }
 
@@ -101,16 +110,21 @@ public class CheckInActivity extends AppCompatActivity
         }
     }
 
+
+
+
+
+
+
     //사이드바 메뉴 선택 시 동작 설정
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         Intent intent = null;
         if (id == R.id.mymap_menu) {
-            intent = new Intent(this, MyMapActivity.class);
+            intent = new Intent(this, CheckInDetailActivity.class);
         } else if (id == R.id.checkin_menu) {
             //Toast.makeText(getApplicationContext(), "Check In", Toast.LENGTH_LONG).show();
             intent = new Intent(this, CheckInActivity.class);
@@ -129,15 +143,6 @@ public class CheckInActivity extends AppCompatActivity
 
         return true;
     }
-
-
-
-
-
-
-
-
-
     private class ListItemAdapter extends BaseAdapter{
 
         private ArrayList<ListItem> items = new ArrayList();

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    tools:context="com.example.misconstructed.jogiyo.AddActivity"
+    android:weightSum="2"
+    android:id="@+id/add"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/theme_color"
+        android:id="@+id/map_frame">
+
+        <TextView
+            android:id="@+id/tmp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textSize="80dp"
+            android:text="지도 영역" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/alarm_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                android:layout_margin="10dp">
+
+                <EditText
+                    android:id="@+id/alarm_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:layout_weight="9"
+                    android:inputType="textPersonName"
+                    android:hint="알람명을 입력하세요" />
+
+                <Switch
+                    android:id="@+id/location_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:textOn="on"
+                    android:textOff="off"
+                    android:switchPadding="0dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:id="@+id/range_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="범위 설정"
+                    android:gravity="center"
+                    android:textSize="20sp"/>
+
+                <Spinner
+                    android:id="@+id/range_spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:entries="@array/range"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:id="@+id/alarm_count_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="알람 횟수"
+                    android:gravity="center"
+                    android:textSize="20sp"/>
+
+                <Spinner
+                    android:id="@+id/alarm_count_spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:entries="@array/alarm_count"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:id="@+id/time_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="시간 미설정"
+                    android:gravity="center"
+                    android:textSize="20sp"/>
+
+                <Button
+                    android:id="@+id/time_confirm"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="show_time_picker"
+                    android:layout_weight="1"
+                    android:text="시간 선택" />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_margin="10dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/date_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="날짜 미설정"
+                    android:gravity="center"
+                    android:textSize="20sp"/>
+
+                <Button
+                    android:id="@+id/date_confirm"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="show_date_picker"
+                    android:layout_weight="1"
+                    android:text="날짜 선택" />
+
+            </LinearLayout>
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/test"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <EditText
+                    android:id="@+id/memo_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="메모를 입력하세요."
+                    android:inputType="text" />
+            </ScrollView>
+
+            <Button
+                android:id="@+id/alert_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="confirm_alarm"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="15dp"
+                android:text="CONFIRM" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>
