@@ -45,6 +45,8 @@ public class LocationService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         user = intent.getParcelableExtra("user");
+        //여기가 문제
+        Log.e("Add activity CA::", user.toString());
         Log.i("WOW", "service started!!!!!!!!!!!!!!!!!!!!!+====================++~~~~!!!!!!!!!!");
         Intent return_intent = new Intent(this, MyMapActivity.class);
         return_intent.putExtra("user", user);
@@ -62,8 +64,8 @@ public class LocationService extends Service {
             LocationThread = new Thread("Location Alarm Thread") {
                 public void run() {
                     //여기서 위치기반 알람 구현
-                    for(int i = 0; i < 10; i ++)
-                        iterator(user);
+                    //for(int i = 0; i < 10; i ++)
+                    iterator(user);
                 }
             };
             LocationThread.start();
@@ -80,10 +82,11 @@ public class LocationService extends Service {
                 //iterator로 전체 알람 조회
                 for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
                     AlarmVo alarm = userSnapshot.getValue(AlarmVo.class);
-
+                    Log.e("alarm id : ", alarm.getId());
+                    Log.e("alarm id : ", user.getId());
                     //회원정보가 맞는 경우
                     if(alarm.getId().equals(user.getId())){
-                        Log.e("alarm id : ", alarm.toString());
+
                         //위치기반 알람인 경우
                         if(alarm.isPlace_alarm() == true) {
                             Log.e("Alarm data", alarm.toString());

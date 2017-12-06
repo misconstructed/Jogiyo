@@ -195,6 +195,8 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
         range = range_spinner.getSelectedItem().toString().substring(0,3);
         count = count_spinner.getSelectedItem().toString().substring(0,1);
 
+        Log.e("Add activity before::", user.toString());
+        Log.e("Add activity user::", user.getId());
         if(place_alarm == false)
             alarm = new AlarmVo(user.getId(), alarm_name, Integer.parseInt(range), Integer.parseInt(count), time, memo, 0, alarm_date, 0, 0, true, place_alarm, time_alarm);
         else
@@ -212,6 +214,7 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
         setAlarm(alarm);
         Intent intent = new Intent(AddActivity.this, MyMapActivity.class);
         intent.putExtra("user", user);
+        //Log.e("Add activity CA::", user.toString());
         startActivity(intent);
     }
 
@@ -299,6 +302,7 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
         } else {
             Intent service_intent = new Intent(AddActivity.this, LocationService.class);
             service_intent.putExtra("user", user);
+            //Log.e("Add activity SA::", user.toString());
             startService(service_intent);
         }
     }
