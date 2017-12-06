@@ -46,14 +46,14 @@ public class LocationService extends Service {
         super.onStartCommand(intent, flags, startId);
         user = intent.getParcelableExtra("user");
         //여기가 문제
-        Log.e("Add activity CA::", user.toString());
-        Log.i("WOW", "service started!!!!!!!!!!!!!!!!!!!!!+====================++~~~~!!!!!!!!!!");
+        //Log.e("문제 일어나고 나서::", user.toString());
+        Log.e("WOW", "service started!!!!!!!!!!!!!!!!!!!!!+====================++~~~~!!!!!!!!!!");
         Intent return_intent = new Intent(this, MyMapActivity.class);
         return_intent.putExtra("user", user);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, return_intent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification noti = new NotificationCompat.Builder(this)
                 .setContentTitle("Jo Gi Yo")
-                .setContentText("Running JoGiYo for "+user.getUser_name())
+                .setContentText("Running JoGiYo for "+user.getName())
                 .setSmallIcon(R.drawable.logo)
                 .setContentIntent(pIntent)
                 .build();
@@ -74,7 +74,7 @@ public class LocationService extends Service {
     }
 
     private void iterator(final UserVo user){
-        Log.d("ITERATOR", "iterato started !!!!!!!!!!!!!!!!!!!!!!!!-----------=======================++!!!!!!!!!!!");
+        Log.e("ITERATOR", "iterato started !!!!!!!!!!!!!!!!!!!!!!!!-----------=======================++!!!!!!!!!!!");
         alarm_database.addValueEventListener(new ValueEventListener() {
             AlarmVo alarm;
             @Override
@@ -82,14 +82,13 @@ public class LocationService extends Service {
                 //iterator로 전체 알람 조회
                 for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
                     AlarmVo alarm = userSnapshot.getValue(AlarmVo.class);
-                    Log.e("alarm id : ", alarm.getId());
-                    Log.e("alarm id : ", user.getId());
+
                     //회원정보가 맞는 경우
                     if(alarm.getId().equals(user.getId())){
 
                         //위치기반 알람인 경우
                         if(alarm.isPlace_alarm() == true) {
-                            Log.e("Alarm data", alarm.toString());
+                            Log.e("Alarm data ::::", alarm.toString());
                         }
                     }
                 }

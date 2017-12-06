@@ -8,41 +8,28 @@ import android.os.Parcelable;
  */
 
 public class UserVo implements Parcelable{
-    private String user_name;
+    private String name;
     private String id;
     private String password;
 
-    public UserVo(){
-        this.user_name = null;
-        this.id = null;
-        this.password = null;
-    }
-    public UserVo(String user_name, String id, String password){
-        this.user_name = user_name;
-        this.id = id;
-        this.password = password;
+    public UserVo() {
     }
 
-    protected UserVo(Parcel in) {
-        user_name = in.readString();
-        id = in.readString();
-        password = in.readString();
+    @Override
+    public String toString() {
+        return "UserVo{" +
+                "name='" + name + '\'' +
+                ", id='" + id + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
-    public static final Creator<UserVo> CREATOR = new Creator<UserVo>() {
-        @Override
-        public UserVo createFromParcel(Parcel in) {
-            return new UserVo(in);
-        }
+    public String getName() {
+        return name;
+    }
 
-        @Override
-        public UserVo[] newArray(int size) {
-            return new UserVo[size];
-        }
-    };
-
-    public String getUser_name() {
-        return user_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getId() {
@@ -61,18 +48,29 @@ public class UserVo implements Parcelable{
         this.password = password;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public UserVo(String name, String id, String password) {
+        this.name = name;
+        this.id = id;
+        this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "UserVo{" +
-                "user_name='" + user_name + '\'' +
-                ", id='" + id + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    protected UserVo(Parcel in) {
+        name = in.readString();
+        id = in.readString();
+        password = in.readString();
     }
+
+    public static final Creator<UserVo> CREATOR = new Creator<UserVo>() {
+        @Override
+        public UserVo createFromParcel(Parcel in) {
+            return new UserVo(in);
+        }
+
+        @Override
+        public UserVo[] newArray(int size) {
+            return new UserVo[size];
+        }
+    };
 
     @Override
     public int describeContents() {
@@ -81,8 +79,8 @@ public class UserVo implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
         dest.writeString(id);
-        dest.writeString(user_name);
         dest.writeString(password);
     }
 }

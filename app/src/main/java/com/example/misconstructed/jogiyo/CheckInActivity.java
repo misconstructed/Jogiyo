@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,7 @@ public class CheckInActivity extends AppCompatActivity
         user = intent.getParcelableExtra("user");
         if(user == null)
             Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
-
+        Log.e("Check IN ::", user.toString());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         ListView listView = (ListView) findViewById(R.id.listView);

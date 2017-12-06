@@ -74,7 +74,6 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     UserVo user = dataSnapshot.getValue(UserVo.class);
 
-                    //email이 중복된 경우
                     if(user == null){
                                 check = true;
                                 idText.setText("");
@@ -85,8 +84,9 @@ public class LoginActivity extends AppCompatActivity {
                             passwordText.setText("");
                             Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
                         } else {
-                            Intent service_intent = new Intent(LoginActivity.this, LocationService.class);
+                            Intent service_intent = new Intent(getApplicationContext(), LocationService.class);
                             service_intent.putExtra("user", user);
+                            Log.e("문제 일어나기 직전 :::", user.toString());
                             startService(service_intent);
                             startApp(user);
                         }
@@ -104,9 +104,10 @@ public class LoginActivity extends AppCompatActivity {
 
     //로그인 진행 앱 첫 화면으로 이동
     private void startApp(UserVo user){
-        Intent intent = new Intent(this, MyMapActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MyMapActivity.class);
         intent.putExtra("user", user);
         Log.e("Login activity::", user.toString());
+
         startActivity(intent);
     }
 

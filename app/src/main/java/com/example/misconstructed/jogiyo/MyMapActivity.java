@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,45 +49,18 @@ public class MyMapActivity extends AppCompatActivity
 
     private FloatingActionButton add;
     private TextView label;
-    private UserVo user;
-
-
-    private GoogleApiClient mGoogleApiClient = null;
-    private GoogleMap mGoogleMap = null;
-    private Marker currentMarker = null;
-
-    private static final String TAG = "googlemap_example";
-    private static final int GPS_ENABLE_REQUEST_CODE = 2001;
-    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 2002;
-    private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
-    private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
-
-    private AppCompatActivity mActivity;
-    boolean askPermissionOnceAgain = false;
-    boolean mRequestingLocationUpdates = false;
-    Location mCurrentLocatiion;
-    boolean mMoveMapByUser = true;
-    boolean mMoveMapByAPI = true;
-    LatLng currentPosition;
-
-    LocationRequest locationRequest = new LocationRequest()
-            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-            .setInterval(UPDATE_INTERVAL_MS)
-            .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
-
+    private UserVo user = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
-                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_my_map);
 
         Intent intent = getIntent();
-        user = intent.getParcelableExtra("user");
+        user = (UserVo)intent.getParcelableExtra("user");
         if(user == null)
             Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
-
+        Log.e("My Map User", user.toString());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         ListView listView = (ListView) findViewById(R.id.listView);

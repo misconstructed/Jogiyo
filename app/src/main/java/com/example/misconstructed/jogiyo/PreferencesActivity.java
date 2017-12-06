@@ -79,7 +79,7 @@ public class PreferencesActivity extends AppCompatActivity
     private void preferencesControl(UserVo user){
         nametext = (EditText)findViewById(R.id.name);
         idtext= (EditText)findViewById(R.id.id);
-        nametext.setText(user.getUser_name());
+        nametext.setText(user.getName());
         idtext.setText(user.getId());
     }
 
@@ -111,7 +111,7 @@ public class PreferencesActivity extends AppCompatActivity
             } else {
                 //새 비밀번호 입력X
                 if (newpassword.length() <= 0 && newpasswordconfirm.length() <= 0) {
-                    user.setUser_name(name);
+                    user.setName(name);
                     database.child("User").child(user.getId()).setValue(user);
                     Intent intent = new Intent(this, PreferencesActivity.class);
                     intent.putExtra("user", user);
@@ -122,7 +122,7 @@ public class PreferencesActivity extends AppCompatActivity
                     //비밀번호까지 바꾼 경우
                     //새 비밀번호 일치
                     if (newpassword.equals(newpasswordconfirm)) {
-                        user.setUser_name(name);
+                        user.setName(name);
                         user.setPassword(newpassword);
                         database.child("User").child(user.getId()).setValue(user);
                         Intent intent = new Intent(this, PreferencesActivity.class);
