@@ -69,6 +69,9 @@ public class PreferencesActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        TextView label=(TextView)findViewById(R.id.title);
+        label.setText("Preferences");
+
         setView(user);
         preferencesControl(user);
     }

@@ -10,7 +10,7 @@
         android:id="@+id/logo"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="130dp"
         app:srcCompat="@drawable/logo"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -77,23 +77,5 @@
         android:onClick="signup"
         android:text="Sign Up!" />
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/facebook_login_button"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:textSize="17sp"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:layout_marginTop="70dp"
-        android:layout_below="@+id/text"
-        android:layout_centerHorizontal="true" />
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/google_login_button"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/facebook_login_button"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

@@ -5,23 +5,16 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.misconstructed.jogiyo.Service.LocationService;
 import com.example.misconstructed.jogiyo.VO.UserVo;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,13 +51,7 @@ public class LoginActivity extends AppCompatActivity {
 
         handler = new Handler();
 
-        facebookLogin();
-        googleLogin();
-        findViewById(R.id.google_login_button).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v){
 
-            }
-        });
         login_button = (Button)findViewById(R.id.login_button);
     }
 
@@ -97,6 +84,9 @@ public class LoginActivity extends AppCompatActivity {
                             passwordText.setText("");
                             Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
                         } else {
+                            Intent service_intent = new Intent(LoginActivity.this, LocationService.class);
+                            service_intent.putExtra("user", user);
+                            startService(service_intent);
                             startApp(user);
                         }
                     }
@@ -124,51 +114,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void googleLogin(){
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        // Build a GoogleSignInClient with the options specified by gso.
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
-    }
-
-    private void facebookLogin(){
-        callbackManager = CallbackManager.Factory.create();
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.d("Tag", "로그인이 성공");
-            }
-
-            @Override
-            public void onCancel() {
-                Log.d("Tag", "로그인 하려다 맘");
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Log.d("Tag", "fail : " + error.getLocalizedMessage());
-            }
-        });
-        facebook_login_button = (Button) findViewById(R.id.facebook_login_button);
-        facebook_login_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, permissionNeeds);
-            }
-        });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // Check for existing Google Sign In account, if the user is already signed in
-        // the GoogleSignInAccount will be non-null.
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        //updateUI(account);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

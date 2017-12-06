@@ -22,6 +22,25 @@ public class AlarmVo implements Parcelable{
     private boolean place_alarm;
     private boolean time_alarm;
 
+    public AlarmVo(String id, String alarm_name, int range, int alarm_count, String time, String memo, int weekday, String date, int x, int y, boolean activate, boolean place_alarm, boolean time_alarm) {
+        this.id = id;
+        this.alarm_name = alarm_name;
+        this.range = range;
+        this.alarm_count = alarm_count;
+        this.time = time;
+        this.memo = memo;
+        this.weekday = weekday;
+        this.date = date;
+        X = x;
+        Y = y;
+        this.activate = activate;
+        this.place_alarm = place_alarm;
+        this.time_alarm = time_alarm;
+    }
+
+    public AlarmVo() {
+    }
+
     protected AlarmVo(Parcel in) {
         id = in.readString();
         alarm_name = in.readString();
@@ -173,21 +192,7 @@ public class AlarmVo implements Parcelable{
         this.time_alarm = time_alarm;
     }
 
-    public AlarmVo(String id, String alarm_name, int range, int alarm_count, String time, String memo, int weekday, String date, int x, int y, boolean activate, boolean place_alarm, boolean time_alarm) {
-        this.id = id;
-        this.alarm_name = alarm_name;
-        this.range = range;
-        this.alarm_count = alarm_count;
-        this.time = time;
-        this.memo = memo;
-        this.weekday = weekday;
-        this.date = date;
-        X = x;
-        Y = y;
-        this.activate = activate;
-        this.place_alarm = place_alarm;
-        this.time_alarm = time_alarm;
-    }
+
 
     @Override
     public int describeContents() {

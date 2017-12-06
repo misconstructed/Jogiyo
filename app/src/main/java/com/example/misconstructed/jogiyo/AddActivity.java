@@ -20,13 +20,11 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -36,12 +34,12 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.misconstructed.jogiyo.Receiver.AlarmReceiver;
+import com.example.misconstructed.jogiyo.Service.LocationService;
 import com.example.misconstructed.jogiyo.VO.AlarmVo;
 import com.example.misconstructed.jogiyo.VO.UserVo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -97,6 +95,9 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        TextView label=(TextView)findViewById(R.id.title);
+        label.setText("My Map");
 
 
         Button date_button = (Button)findViewById(R.id.date_confirm);
@@ -177,6 +178,7 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
         range_spinner = (Spinner)findViewById(R.id.range_spinner);
         count_spinner = (Spinner)findViewById(R.id.alarm_count_spinner);
         memo_text = (EditText)findViewById(R.id.memo_text);
+        AlarmVo alarm;
 
         Switch locationSwitch = (Switch)findViewById(R.id.location_switch);
         if(locationSwitch.isChecked() == true) {
@@ -193,7 +195,10 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
         range = range_spinner.getSelectedItem().toString().substring(0,3);
         count = count_spinner.getSelectedItem().toString().substring(0,1);
 
-        AlarmVo alarm = new AlarmVo(user.getId(), alarm_name, Integer.parseInt(range), Integer.parseInt(count), time, memo, 0, alarm_date, 0, 0, true, place_alarm, time_alarm);
+        if(place_alarm == false)
+            alarm = new AlarmVo(user.getId(), alarm_name, Integer.parseInt(range), Integer.parseInt(count), time, memo, 0, alarm_date, 0, 0, true, place_alarm, time_alarm);
+        else
+            alarm = new AlarmVo(user.getId(), alarm_name, Integer.parseInt(range), Integer.parseInt(count), "시간 미설정", memo, 0, "날짜 미설정", 0, 0, true, place_alarm, time_alarm);
         return alarm;
     }
 
@@ -223,6 +228,7 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
         new DatePickerDialog(AddActivity.this, dateSetListener, year, month, day).show();
     }
 
+    //날짜 선택
     private DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -234,6 +240,7 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
         }
     };
 
+    //알람 디비에 등록
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void setAlarm(AlarmVo alarm){
         String time_string;
@@ -246,45 +253,54 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
         int month;
         int day;
         int charAt, charAt2;
+        //시간 기반 알람인 경우
+        if(alarm.isTime_alarm() == true) {
+            time_string = alarm.getTime();
+            charAt = time_string.indexOf(":");
+            hour_string = time_string.substring(0, charAt);
+            min_string = time_string.substring(charAt + 1, time_string.length());
+            hour = Integer.parseInt(hour_string);
+            min = Integer.parseInt(min_string);
 
-        time_string = alarm.getTime();
-        charAt = time_string.indexOf(":");
-        hour_string = time_string.substring(0, charAt);
-        min_string = time_string.substring(charAt+1 ,time_string.length());
-        hour = Integer.parseInt(hour_string);
-        min = Integer.parseInt(min_string);
+            date_string = alarm.getDate();
+            charAt = date_string.indexOf("/");
+            year = Integer.parseInt(date_string.substring(0, charAt));
+            charAt2 = date_string.indexOf("/", 5);
+            //Toast.makeText(getApplicationContext(), charAt +"  " + charAt2, Toast.LENGTH_LONG).show();
+            Log.d("IMPOR", "charAt : " + charAt + " CharAt2 : " + charAt2);
+            month = Integer.parseInt(date_string.substring(charAt + 1, charAt2));
+            day = Integer.parseInt(date_string.substring(charAt2 + 1, date_string.length()));
 
-        date_string = alarm.getDate();
-        charAt = date_string.indexOf("/");
-        year = Integer.parseInt(date_string.substring(0, charAt));
-        charAt2 = date_string.indexOf("/", 5);
-        //Toast.makeText(getApplicationContext(), charAt +"  " + charAt2, Toast.LENGTH_LONG).show();
-        Log.d("IMPOR", "charAt : "+charAt+" CharAt2 : "+charAt2);
-        month = Integer.parseInt(date_string.substring(charAt+1, charAt2));
-        day = Integer.parseInt(date_string.substring(charAt2+1, date_string.length()));
+            Log.d("IMPORTANT", year + " / " + month + " / " + day);
+            Log.d("TIME", hour + " : " + min);
 
-        Log.d("IMPORTANT", year+" / "+month+" / "+day);
-        Log.d("TIME", hour+" !!! "+min);
-        calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month-1);
-        calendar.set(Calendar.DAY_OF_MONTH, day);
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, min);
-        alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+            //전송할 날짜 지정
+            calendar = Calendar.getInstance();
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month - 1);
+            calendar.set(Calendar.DAY_OF_MONTH, day);
+            calendar.set(Calendar.HOUR_OF_DAY, hour);
+            calendar.set(Calendar.MINUTE, min);
+            calendar.set(Calendar.SECOND, 0);
+            alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-        intent.putExtra("alarm_data", alarm);
+            Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+            intent.putExtra("alarm", alarm);
 
-        //두번째 인자 => 고유 코드
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            //두번째 인자 => 고유 코드
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        //Log.e("TIME", String.valueOf(calendar.getTimeInMillis()));
+            //Log.e("TIME", String.valueOf(calendar.getTimeInMillis()));
 
-        if(alarm.getAlarm_count() == 1)
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),0, pendingIntent);
-        else
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+            if (alarm.getAlarm_count() == 1)
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 0, pendingIntent);
+            else
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+        } else {
+            Intent service_intent = new Intent(AddActivity.this, LocationService.class);
+            service_intent.putExtra("user", user);
+            startService(service_intent);
+        }
     }
 
 
