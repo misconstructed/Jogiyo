@@ -1,6 +1,7 @@
 package com.example.misconstructed.jogiyo;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -125,18 +127,41 @@ public class CheckInDetailActivity extends AppCompatActivity
         Intent intent = null;
         if (id == R.id.mymap_menu) {
             intent = new Intent(this, CheckInDetailActivity.class);
+            intent.putExtra("user", user);
         } else if (id == R.id.checkin_menu) {
             //Toast.makeText(getApplicationContext(), "Check In", Toast.LENGTH_LONG).show();
             intent = new Intent(this, CheckInActivity.class);
+            intent.putExtra("user", user);
         } else if (id == R.id.preferences_menu) {
             //Toast.makeText(getApplicationContext(), "Preferences", Toast.LENGTH_LONG).show();
             intent = new Intent(this, PreferencesActivity.class);
+            intent.putExtra("user", user);
         } else if (id == R.id.logout_menu) {
             //Toast.makeText(getApplicationContext(), "Log Out", Toast.LENGTH_LONG).show();
-            intent = new Intent(this, LoginActivity.class);
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CheckInDetailActivity.this);
+            alertDialogBuilder.setTitle("프로그램 종료");
+            alertDialogBuilder
+                    .setMessage("프로그램을 종료할 것입니까?")
+                    .setCancelable(false)
+                    .setPositiveButton("종료",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // 프로그램을 종료한다
+                                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+                                }
+                            })
+                    .setNegativeButton("취소",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // 다이얼로그를 취소한다
+                                    dialog.cancel();
+                                }
+                            }).create().show();
         }
-        intent.putExtra("user", user);
-        startActivity(intent);
+        if(intent != null)
+            startActivity(intent);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

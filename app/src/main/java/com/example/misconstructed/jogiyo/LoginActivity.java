@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), MyMapActivity.class);
         intent.putExtra("user", user);
         Log.e("Login activity::", user.toString());
-
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
