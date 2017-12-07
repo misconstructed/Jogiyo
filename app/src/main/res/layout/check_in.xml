@@ -25,6 +25,7 @@
             android:hint="알람명을 입력하세요." />
 
         <ImageButton
+            android:id="@+id/search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

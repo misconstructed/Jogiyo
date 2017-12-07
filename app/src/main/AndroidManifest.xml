@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -12,44 +11,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBgU2WtdtNbRq30Dm3CkYVCs7GvcAm3Jwg" />
 
         <activity
             android:name=".StartActivity"
-            android:exported="true"
+            android:theme="@style/AppTheme"
             android:launchMode="singleTask"
-            android:noHistory="true"
-            android:theme="@style/AppTheme">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:exported="true"
-            android:launchMode="singleTask" />
+        <activity android:name=".LoginActivity"
+            android:launchMode="singleTask"
+            android:exported="true"/>
         <activity
             android:name=".SignupActivity"
-            android:exported="true"
-            android:label="Sign Up"
+            android:theme="@style/SignUp"
             android:launchMode="singleTask"
-            android:noHistory="true"
-            android:theme="@style/SignUp">
+            android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LoginActivity" />
         </activity>
         <activity
             android:name=".MyMapActivity"
-            android:exported="true"
-            android:label="My Map"
+            android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTask"
-            android:noHistory="true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:exported="true"/>
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -62,33 +56,21 @@
 
         <activity
             android:name=".AddActivity"
-            android:label="My Map"
-            android:noHistory="true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".CheckInDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".PreferencesActivity"
-            android:exported="true"
-            android:label="Preferences"
+            android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTask"
-            android:noHistory="true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:exported="true"/>
         <activity
             android:name=".CheckInActivity"
-            android:exported="true"
-            android:label="Check In"
+            android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTask"
-            android:noHistory="true"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <receiver
-            android:name=".Receiver.AlarmReceiver"
-            android:enabled="true"
-            android:exported="true" />
-
-        <service
-            android:name=".Service.LocationService"
-            android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true"/>
     </application>
 
 </manifest>
