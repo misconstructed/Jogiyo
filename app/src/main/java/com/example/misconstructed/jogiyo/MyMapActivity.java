@@ -2,27 +2,20 @@ package com.example.misconstructed.jogiyo;
 
 
 import android.content.Intent;
-
 import android.location.Location;
-
 import android.os.Bundle;
-
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
-
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -36,12 +29,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
 
 public class MyMapActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -127,7 +115,7 @@ public class MyMapActivity extends AppCompatActivity
         LinearLayout my_map = (LinearLayout)findViewById(R.id.my_map);
         RelativeLayout check_in = (RelativeLayout)findViewById(R.id.check_in);
         RelativeLayout preferences = (RelativeLayout)findViewById(R.id.preferences);
-        LinearLayout check_in_detail = (LinearLayout)findViewById(R.id.check_in_detail);
+        RelativeLayout check_in_detail = (RelativeLayout)findViewById(R.id.check_in_detail);
         LinearLayout add = (LinearLayout)findViewById(R.id.add);
 
         my_map.setVisibility(View.VISIBLE);

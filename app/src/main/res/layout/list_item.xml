@@ -63,6 +63,17 @@
         android:textOff="Off"
         android:textOn="On" />
 
+    <TextView
+        android:id="@+id/checkText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OFF"
+        android:textSize="17dp"
+        android:textColor="#000"
+        android:layout_below="@id/check"
+        android:layout_alignLeft="@id/check"
+        android:layout_alignRight="@id/check"/>
+
     <Button
         android:id="@+id/detail"
         style="@style/Widget.AppCompat.Button"

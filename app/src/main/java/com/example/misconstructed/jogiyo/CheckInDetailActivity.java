@@ -2,7 +2,6 @@ package com.example.misconstructed.jogiyo;
 
 
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -15,19 +14,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
+import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.misconstructed.jogiyo.VO.UserVo;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 
 import java.util.ArrayList;
 
@@ -37,6 +36,11 @@ public class CheckInDetailActivity extends AppCompatActivity
     private FloatingActionButton add;
     private TextView label;
     private UserVo user;
+    private GridView menu;
+    private Switch check;
+    private TextView checkText;
+    private ImageButton star;
+    boolean starCheck=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,64 @@ public class CheckInDetailActivity extends AppCompatActivity
         ListView listView = (ListView) findViewById(R.id.listView);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+
+        final ChooseItemAdapter adapter = new ChooseItemAdapter();
+        adapter.addItem(0);adapter.addItem(1);adapter.addItem(2);
+        menu=(GridView)findViewById(R.id.menuDetail);
+        menu.setAdapter(adapter);
+        menu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                int itemId = (int)adapter.getItemId(position);
+                //삭제 버튼
+                if (itemId == 0)
+                    Toast.makeText(getApplicationContext(),"삭제",Toast.LENGTH_LONG).show();
+                //수정 버튼
+                if(itemId==1)
+                    Toast.makeText(getApplicationContext(),"수정",Toast.LENGTH_LONG).show();
+                //공유 버튼
+                if(itemId==2)
+                    Toast.makeText(getApplicationContext(),"공유",Toast.LENGTH_LONG).show();
+            }
+        });
+        menu.setSelection(R.color.sidebar_id);
+
+        check=(Switch)findViewById(R.id.checkDetail);
+        checkText=(TextView)findViewById(R.id.checkTextDetail);
+        //스위치리스너
+        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                {
+                    checkText.setText("ON");
+                    //db에 넣는거 하면될듯
+                }
+                else
+                {
+                    checkText.setText("OFF");
+                    //db
+                }
+            }
+        });
+
+        star=(ImageButton)findViewById(R.id.starDetail);
+        star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(starCheck)
+                {
+                    star.setImageResource(android.R.drawable.star_big_off);
+                    starCheck=false;
+                }
+                else
+                {
+                    star.setImageResource(android.R.drawable.star_big_on);
+                    starCheck=true;
+                }
+            }
+        });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -79,7 +141,7 @@ public class CheckInDetailActivity extends AppCompatActivity
         LinearLayout my_map = (LinearLayout)findViewById(R.id.my_map);
         RelativeLayout check_in = (RelativeLayout)findViewById(R.id.check_in);
         RelativeLayout preferences = (RelativeLayout)findViewById(R.id.preferences);
-        LinearLayout check_in_detail = (LinearLayout)findViewById(R.id.check_in_detail);
+        RelativeLayout check_in_detail = (RelativeLayout)findViewById(R.id.check_in_detail);
         LinearLayout add = (LinearLayout)findViewById(R.id.add);
 
         my_map.setVisibility(View.GONE);

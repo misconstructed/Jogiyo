@@ -2,7 +2,6 @@ package com.example.misconstructed.jogiyo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -29,6 +29,7 @@ public class CheckInActivity extends AppCompatActivity
 
     private FloatingActionButton add;
     private TextView label;
+    private ImageButton searchButton;
     private UserVo user;
     private String name;
     private String id;
@@ -62,6 +63,15 @@ public class CheckInActivity extends AppCompatActivity
         label=(TextView)findViewById(R.id.title);
         label.setText("Check In");
 
+        searchButton = (ImageButton)findViewById(R.id.search);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),CheckInDetailActivity.class);
+                startActivity(intent);
+            }
+        });
+
         setView(user);
     }
 
@@ -70,7 +80,7 @@ public class CheckInActivity extends AppCompatActivity
         LinearLayout my_map = (LinearLayout)findViewById(R.id.my_map);
         RelativeLayout check_in = (RelativeLayout)findViewById(R.id.check_in);
         RelativeLayout preferences = (RelativeLayout)findViewById(R.id.preferences);
-        LinearLayout check_in_detail = (LinearLayout)findViewById(R.id.check_in_detail);
+        RelativeLayout check_in_detail = (RelativeLayout)findViewById(R.id.check_in_detail);
         LinearLayout add = (LinearLayout)findViewById(R.id.add);
 
         my_map.setVisibility(View.GONE);

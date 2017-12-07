@@ -3,8 +3,6 @@ package com.example.misconstructed.jogiyo;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -161,7 +159,7 @@ public class PreferencesActivity extends AppCompatActivity
         LinearLayout my_map = (LinearLayout)findViewById(R.id.my_map);
         RelativeLayout check_in = (RelativeLayout)findViewById(R.id.check_in);
         RelativeLayout preferences = (RelativeLayout)findViewById(R.id.preferences);
-        LinearLayout check_in_detail = (LinearLayout)findViewById(R.id.check_in_detail);
+        RelativeLayout check_in_detail = (RelativeLayout)findViewById(R.id.check_in_detail);
         LinearLayout add = (LinearLayout)findViewById(R.id.add);
 
         my_map.setVisibility(View.GONE);

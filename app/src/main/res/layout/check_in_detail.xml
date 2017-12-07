@@ -1,7 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/check_in_detail"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/check_in_detail">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="#fff"
+    android:paddingTop="15dp">
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/listnameDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="15dp"
+        android:textSize="24sp"
+        android:text="listname"
+        android:textColor="#000"/>
+
+    <ImageButton
+        android:id="@+id/starDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@id/listnameDetail"
+        android:layout_toRightOf="@id/listnameDetail"
+        android:background="#ffff"
+        app:srcCompat="@android:drawable/btn_star_big_off" />
+
+    <TextView
+        android:id="@+id/listplaceDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/listnameDetail"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:text="list place"
+        android:textSize="18sp"
+        android:textColor="#000"/>
+
+    <TextView
+        android:id="@+id/listtimeDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/listplaceDetail"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:text="list time"
+        android:textSize="18sp"
+        android:textColor="#000"/>
+
+    <Switch
+        android:id="@+id/checkDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/listnameDetail"
+        android:layout_alignBottom="@+id/listnameDetail"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:textOff="Off"
+        android:textOn="On" />
+
+    <TextView
+        android:id="@+id/checkTextDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OFF"
+        android:textSize="17sp"
+        android:textColor="#000"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@id/checkDetail"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"/>
+
+    <TextView
+        android:id="@+id/mapDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="210dp"
+        android:background="@color/theme_color"
+        android:text="지도"
+        android:textSize="40sp"
+        android:layout_margin="15dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/listtimeDetail"/>
+
+    <EditText
+        android:id="@+id/memoDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mapDetail"
+        android:layout_alignLeft="@id/mapDetail"
+        android:layout_toLeftOf="@id/explain"
+        android:hint="메모"/>
+
+    <Switch
+        android:id="@+id/locationSwitchDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mapDetail"
+        android:layout_alignRight="@id/mapDetail" />
+    <TextView
+        android:id="@+id/explain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="위치설정"
+        android:layout_below="@id/locationSwitchDetail"
+        android:layout_alignRight="@id/locationSwitchDetail"/>
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="7dp"
+        android:layout_below="@id/memoDetail">
+
+    <LinearLayout
+        android:id="@+id/range"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/rangeTextDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="범위 설정"
+            android:gravity="center"
+            android:textSize="15sp"/>
+
+        <Spinner
+            android:id="@+id/rangeSpinnerDetail"
+            android:layout_width="7dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/range"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/alarmCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/alarmCountDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="알람 횟수"
+            android:gravity="center"
+            android:textSize="15sp"/>
+
+        <Spinner
+            android:id="@+id/alarmCountSpinnerDetail"
+            android:layout_width="7dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/alarm_count"/>
+
+    </LinearLayout>
+    </LinearLayout>
+
+
+    <GridView
+        android:id="@+id/menuDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="5dp"
+        android:numColumns="3">
+    </GridView>
+
+
+</RelativeLayout>

@@ -16,6 +16,7 @@ class ListItemView extends LinearLayout {
     TextView listname;
     TextView listplace;
     TextView listtime;
+    TextView checkText;
     ImageButton star;
     Switch check;
 
@@ -35,6 +36,7 @@ class ListItemView extends LinearLayout {
         listname = (TextView) findViewById(R.id.listname);
         listplace = (TextView) findViewById(R.id.listplace);
         listtime = (TextView) findViewById(R.id.listtime);
+        checkText=(TextView)findViewById(R.id.checkText);
         star = (ImageButton) findViewById(R.id.star);
         check = (Switch) findViewById(R.id.check);
     }
@@ -53,6 +55,10 @@ class ListItemView extends LinearLayout {
     }
 
     void setCheck(boolean check){
+        if(check)
+            checkText.setText("ON");
+        else
+            checkText.setText("OFF");
         this.check.setChecked(check);
     }
 }
