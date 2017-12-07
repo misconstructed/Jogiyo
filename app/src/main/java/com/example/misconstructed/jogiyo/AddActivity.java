@@ -284,7 +284,7 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
             calendar.set(Calendar.DAY_OF_MONTH, day);
             calendar.set(Calendar.HOUR_OF_DAY, hour);
             calendar.set(Calendar.MINUTE, min);
-            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.SECOND, 1);
             alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
             Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
@@ -302,7 +302,7 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
         } else {
             Intent service_intent = new Intent(AddActivity.this, LocationService.class);
             service_intent.putExtra("user", user);
-            //Log.e("Add activity SA::", user.toString());
+            Log.e("문제 일어나기 전::", user.toString());
             startService(service_intent);
         }
     }
