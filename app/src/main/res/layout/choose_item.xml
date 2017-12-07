@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="7dp"
-    android:background="#F4F4F4">
+    android:background="#FFF">
 
     <ImageView
         android:id="@+id/detailMenu"

@@ -106,12 +106,12 @@ public class CheckInDetailActivity extends AppCompatActivity
             public void onClick(View view) {
                 if(starCheck)
                 {
-                    star.setImageResource(android.R.drawable.star_big_off);
+                    star.setImageResource(android.R.drawable.btn_star_big_off);
                     starCheck=false;
                 }
                 else
                 {
-                    star.setImageResource(android.R.drawable.star_big_on);
+                    star.setImageResource(android.R.drawable.btn_star_big_on);
                     starCheck=true;
                 }
             }
