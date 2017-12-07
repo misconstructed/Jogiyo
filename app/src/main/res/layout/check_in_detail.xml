@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/mapDetail"
         android:layout_alignLeft="@id/mapDetail"
-        android:layout_toLeftOf="@id/explain"
+        android:layout_toLeftOf="@+id/explain"
         android:hint="메모"/>
 
     <Switch

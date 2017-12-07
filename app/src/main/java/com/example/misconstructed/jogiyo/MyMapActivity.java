@@ -1,6 +1,7 @@
 package com.example.misconstructed.jogiyo;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.location.Location;
