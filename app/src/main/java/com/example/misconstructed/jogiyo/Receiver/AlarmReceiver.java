@@ -5,18 +5,11 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.misconstructed.jogiyo.MyMapActivity;
 import com.example.misconstructed.jogiyo.R;
-import com.example.misconstructed.jogiyo.VO.AlarmVo;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
@@ -26,13 +19,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         //알람 울릴 때 소리
         //MediaPlayer mediaPlayer = MediaPlayer.create(context, Settings.System.DEFAULT_RINGTONE_URI);
         //mediaPlayer.start();
-
-        Intent tmp = intent.getParcelableExtra("alarm");
-        if(tmp == null)
-            Log.e("ALERT", "is NULL");
-        else
-            Log.e("ALERT", "not NULL");
-
 
 
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);

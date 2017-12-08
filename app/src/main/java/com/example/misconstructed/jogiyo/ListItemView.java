@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 class ListItemView extends LinearLayout {
     TextView listname;
-    TextView listplace;
     TextView listtime;
     TextView checkText;
     ImageButton star;
@@ -37,9 +36,7 @@ class ListItemView extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.list_item, this, true);
         listname = (TextView) findViewById(R.id.listname);
-        listplace = (TextView) findViewById(R.id.listplace);
         listtime = (TextView) findViewById(R.id.listtime);
-        checkText=(TextView)findViewById(R.id.checkText);
         star = (ImageButton) findViewById(R.id.star);
         check = (Switch) findViewById(R.id.check);
 
@@ -74,11 +71,13 @@ class ListItemView extends LinearLayout {
         });
     }
 
-    void setName(String name){  listname.setText(name); }
+    void setName(String name){
+        listname.setText(name);
+    }
 
-    void setPlace(){    listplace.setText("미구현입니다.");   }
-
-    void setTime(String time){  listtime.setText(time); }
+    void setTime(String time){
+        listtime.setText(time);
+    }
 
     void setStar(boolean star){
         if(star) {

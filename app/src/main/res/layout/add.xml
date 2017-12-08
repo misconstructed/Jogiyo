@@ -17,14 +17,14 @@
         android:background="@color/theme_color"
         android:id="@+id/map_frame">
 
-        <TextView
-            android:id="@+id/tmp"
+        <fragment
+            android:id="@+id/map1"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:textSize="80dp"
-            android:text="지도 영역" />
+            class="com.google.android.gms.maps.MapFragment" />
     </RelativeLayout>
 
     <ScrollView

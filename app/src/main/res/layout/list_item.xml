@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="#ffff"
     android:padding="15dp">
-    
+
     <TextView
         android:id="@+id/listname"
         android:layout_width="wrap_content"
@@ -30,16 +30,6 @@
         android:background="#ffff"
         app:srcCompat="@android:drawable/btn_star_big_off" />
 
-    <TextView
-        android:id="@+id/listplace"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/listname"
-        android:text="list place"
-        android:textSize="18dp"
-        android:textColor="#000"/>
 
     <TextView
         android:id="@+id/listtime"
@@ -47,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/listplace"
+        android:layout_below="@id/listname"
         android:text="list time"
         android:textSize="18dp"
         android:textColor="#000"/>
@@ -85,7 +75,8 @@
         android:layout_below="@+id/listtime"
         android:layout_margin="1dp"
         android:text="상세보기    >"
-        android:textColor="#000"
+        android:background="@color/theme_color"
+        android:textColor="#FFF"
         android:textSize="10dp" />
 
 

@@ -16,13 +16,16 @@ public class AlarmVo implements Parcelable{
     private String memo;
     private int weekday;
     private String date;
-    private int X;
-    private int Y;
+    private double X;
+    private double Y;
     private boolean activate;
     private boolean place_alarm;
     private boolean time_alarm;
 
-    public AlarmVo(String id, String alarm_name, int range, int alarm_count, String time, String memo, int weekday, String date, int x, int y, boolean activate, boolean place_alarm, boolean time_alarm) {
+    public AlarmVo() {
+    }
+
+    public AlarmVo(String id, String alarm_name, int range, int alarm_count, String time, String memo, int weekday, String date, double x, double y, boolean activate, boolean place_alarm, boolean time_alarm) {
         this.id = id;
         this.alarm_name = alarm_name;
         this.range = range;
@@ -36,56 +39,6 @@ public class AlarmVo implements Parcelable{
         this.activate = activate;
         this.place_alarm = place_alarm;
         this.time_alarm = time_alarm;
-    }
-
-    public AlarmVo() {
-    }
-
-    protected AlarmVo(Parcel in) {
-        id = in.readString();
-        alarm_name = in.readString();
-        range = in.readInt();
-        alarm_count = in.readInt();
-        time = in.readString();
-        memo = in.readString();
-        weekday = in.readInt();
-        date = in.readString();
-        X = in.readInt();
-        Y = in.readInt();
-        activate = in.readByte() != 0;
-        place_alarm = in.readByte() != 0;
-        time_alarm = in.readByte() != 0;
-    }
-
-    public static final Creator<AlarmVo> CREATOR = new Creator<AlarmVo>() {
-        @Override
-        public AlarmVo createFromParcel(Parcel in) {
-            return new AlarmVo(in);
-        }
-
-        @Override
-        public AlarmVo[] newArray(int size) {
-            return new AlarmVo[size];
-        }
-    };
-
-    @Override
-    public String toString() {
-        return "AlarmVo{" +
-                "id='" + id + '\'' +
-                ", alarm_name='" + alarm_name + '\'' +
-                ", range=" + range +
-                ", alarm_count=" + alarm_count +
-                ", time='" + time + '\'' +
-                ", memo='" + memo + '\'' +
-                ", weekday=" + weekday +
-                ", date='" + date + '\'' +
-                ", X=" + X +
-                ", Y=" + Y +
-                ", activate=" + activate +
-                ", place_alarm=" + place_alarm +
-                ", time_alarm=" + time_alarm +
-                '}';
     }
 
     public String getId() {
@@ -152,19 +105,19 @@ public class AlarmVo implements Parcelable{
         this.date = date;
     }
 
-    public int getX() {
+    public double getX() {
         return X;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         X = x;
     }
 
-    public int getY() {
+    public double getY() {
         return Y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         Y = y;
     }
 
@@ -192,7 +145,52 @@ public class AlarmVo implements Parcelable{
         this.time_alarm = time_alarm;
     }
 
+    @Override
+    public String toString() {
+        return "AlarmVo{" +
+                "id='" + id + '\'' +
+                ", alarm_name='" + alarm_name + '\'' +
+                ", range=" + range +
+                ", alarm_count=" + alarm_count +
+                ", time='" + time + '\'' +
+                ", memo='" + memo + '\'' +
+                ", weekday=" + weekday +
+                ", date='" + date + '\'' +
+                ", X=" + X +
+                ", Y=" + Y +
+                ", activate=" + activate +
+                ", place_alarm=" + place_alarm +
+                ", time_alarm=" + time_alarm +
+                '}';
+    }
 
+    protected AlarmVo(Parcel in) {
+        id = in.readString();
+        alarm_name = in.readString();
+        range = in.readInt();
+        alarm_count = in.readInt();
+        time = in.readString();
+        memo = in.readString();
+        weekday = in.readInt();
+        date = in.readString();
+        X = in.readDouble();
+        Y = in.readDouble();
+        activate = in.readByte() != 0;
+        place_alarm = in.readByte() != 0;
+        time_alarm = in.readByte() != 0;
+    }
+
+    public static final Creator<AlarmVo> CREATOR = new Creator<AlarmVo>() {
+        @Override
+        public AlarmVo createFromParcel(Parcel in) {
+            return new AlarmVo(in);
+        }
+
+        @Override
+        public AlarmVo[] newArray(int size) {
+            return new AlarmVo[size];
+        }
+    };
 
     @Override
     public int describeContents() {
@@ -209,8 +207,8 @@ public class AlarmVo implements Parcelable{
         dest.writeString(memo);
         dest.writeInt(weekday);
         dest.writeString(date);
-        dest.writeInt(X);
-        dest.writeInt(Y);
+        dest.writeDouble(X);
+        dest.writeDouble(Y);
         dest.writeByte((byte) (activate ? 1 : 0));
         dest.writeByte((byte) (place_alarm ? 1 : 0));
         dest.writeByte((byte) (time_alarm ? 1 : 0));

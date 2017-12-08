@@ -15,7 +15,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -23,9 +26,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.misconstructed.jogiyo.VO.AlarmVo;
 import com.example.misconstructed.jogiyo.VO.UserVo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CheckInActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,6 +46,10 @@ public class CheckInActivity extends AppCompatActivity
     private UserVo user;
     private String name;
     private String id;
+
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference alarm_database = firebaseDatabase.getReference("Alarm");
+    private DatabaseReference database = firebaseDatabase.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,16 +80,87 @@ public class CheckInActivity extends AppCompatActivity
         label=(TextView)findViewById(R.id.title);
         label.setText("Check In");
 
-        searchButton = (ImageButton)findViewById(R.id.search);
-        searchButton.setOnClickListener(new View.OnClickListener() {
+
+
+        setList(user);
+
+        setView(user);
+    }
+
+    public void findAlarm(View v){
+        EditText finding_name_text = (EditText)findViewById(R.id.editText);
+        final String finding_name = finding_name_text.getText().toString();
+        final ListAdapter adapter = new ListAdapter();
+        ListView listView = (ListView) findViewById(R.id.listView);
+        final List<AlarmVo> list = new ArrayList<AlarmVo>();
+
+        if(finding_name.length() <= 0)
+            Toast.makeText(getApplicationContext(), "내용을 입력하세요", Toast.LENGTH_LONG).show();
+        else{
+            alarm_database.addValueEventListener(new ValueEventListener() {
+                AlarmVo alarm;
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    //iterator로 전체 알람 조회
+                    for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                        final AlarmVo alarm = userSnapshot.getValue(AlarmVo.class);
+                        //회원정보가 맞는 경우
+                        if(alarm.getId().equals(user.getId())){
+                            if(alarm.getAlarm_name().contains(finding_name))
+                                adapter.addItem(alarm);
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            listView.setAdapter(adapter);
+        }
+    }
+
+    private void setList(final UserVo user){
+        final ListAdapter adapter = new ListAdapter();
+        ListView listView = (ListView) findViewById(R.id.listView);
+        final List<AlarmVo> list = new ArrayList<AlarmVo>();
+
+
+        alarm_database.addValueEventListener(new ValueEventListener() {
+            AlarmVo alarm;
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),CheckInDetailActivity.class);
-                startActivity(intent);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //iterator로 전체 알람 조회
+                for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                    final AlarmVo alarm = userSnapshot.getValue(AlarmVo.class);
+                    //회원정보가 맞는 경우
+                    if(alarm.getId().equals(user.getId())){
+                        adapter.addItem(alarm);
+                        list.add(alarm);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
 
-        setView(user);
+
+        listView.setAdapter(adapter);
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AlarmVo item = (AlarmVo) adapter.getItem(position);
+                Log.e("WOW!!!!! ::::::", ((AlarmVo) adapter.getItem(position)).getAlarm_name());
+            }
+        });
+
+
     }
 
     //첫 화면이니깐 my map이 보여야함
@@ -202,10 +287,10 @@ public class CheckInActivity extends AppCompatActivity
             ListItem item = items.get(position);
 
             listView.setName(item.getName());
-            listView.setPlace();
+            //listView.setPlace();
             listView.setTime(item.getTime());
             listView.setStar(item.isStar());
-            listView.setCheck(item.isCheck());
+            //listView.setCheck(item.isCheck());
 
             return listView;
         }

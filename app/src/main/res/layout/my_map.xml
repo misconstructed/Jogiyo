@@ -7,15 +7,13 @@
     android:id="@+id/my_map"
     android:background="@color/background"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:weightSum = "3"
     android:orientation="vertical">
 
 
     <RelativeLayout
         android:id="@+id/map_frame"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_height="match_parent"
         android:background="@color/theme_color">
 
         <android.support.design.widget.FloatingActionButton
@@ -27,31 +25,14 @@
             android:layout_margin="16dp"
             app:srcCompat="@android:drawable/ic_input_add" />
 
-        <TextView
-            android:id="@+id/tmp"
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/add"
-            android:layout_centerHorizontal="true"
-            android:textSize="80dp"
-            android:layout_marginBottom="100dp"
-            android:text="지도 영역" />
+            class="com.google.android.gms.maps.MapFragment" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/list_frame"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_below="@id/map_frame">
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_alignParentBottom="true">
-
-        </ListView>
-    </RelativeLayout>
 </LinearLayout>
 
     <!-- 마이맵 화면 -->

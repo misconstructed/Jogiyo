@@ -13,4 +13,5 @@
     <string name="facebook_application_id" translatable="false">com.example.misconstructed.jogiyo</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fbcom.example.misconstructed.jogiyo</string>
     <string name="default_date">01월 01일</string>
+    <string name="title_activity_tmp">Map</string>
 </resources>

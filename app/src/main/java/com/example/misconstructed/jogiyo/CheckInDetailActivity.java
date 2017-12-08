@@ -230,42 +230,5 @@ public class CheckInDetailActivity extends AppCompatActivity
 
         return true;
     }
-    private class ListItemAdapter extends BaseAdapter{
 
-        private ArrayList<ListItem> items = new ArrayList();
-
-        @Override
-        public int getCount() {
-            return items.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return items.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup viewGroup) {
-            ListItemView listView = (ListItemView) convertView;
-            if (convertView == null)
-                listView = new ListItemView(getApplicationContext());
-
-            ListItem item = items.get(position);
-
-            listView.setName(item.getName());
-            listView.setPlace();
-            listView.setTime(item.getTime());
-            listView.setStar(item.isStar());
-            listView.setCheck(item.isCheck());
-
-            return listView;
-        }
-
-        void addItem(ListItem item) { items.add(item); }
-    }
 }
