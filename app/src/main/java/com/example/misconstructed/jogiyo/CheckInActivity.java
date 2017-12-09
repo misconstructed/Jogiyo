@@ -79,6 +79,7 @@ public class CheckInActivity extends AppCompatActivity
         label=(TextView)findViewById(R.id.title);
         label.setText("Check In");
 
+        //검색기능
         searchButton=(ImageButton)findViewById(R.id.search);
         searchText=(EditText)findViewById(R.id.editText);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -170,7 +171,7 @@ public class CheckInActivity extends AppCompatActivity
                 Intent intent = new Intent(getApplicationContext(),CheckInDetailActivity.class);
                 intent.putExtra("AlarmVo",item);
                 intent.putExtra("user", user);
-                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
             }
         });

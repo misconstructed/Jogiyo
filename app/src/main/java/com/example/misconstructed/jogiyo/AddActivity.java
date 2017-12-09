@@ -1,17 +1,27 @@
 package com.example.misconstructed.jogiyo;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import java.util.Calendar;
-import android.icu.util.GregorianCalendar;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -21,8 +31,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -40,25 +48,6 @@ import com.example.misconstructed.jogiyo.Receiver.AlarmReceiver;
 import com.example.misconstructed.jogiyo.Service.LocationService;
 import com.example.misconstructed.jogiyo.VO.AlarmVo;
 import com.example.misconstructed.jogiyo.VO.UserVo;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
-import android.Manifest;
-import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
-import android.net.Uri;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -73,9 +62,14 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -83,10 +77,12 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
 
     private EditText alarm_name_text;
     private TextView time_text;
+    private TextView date_text;
     private Spinner range_spinner;
     private Spinner count_spinner;
     private String alarm_name;
     private EditText memo_text;
+    private Switch location;
     private String memo;
     private String range;
     private String count;
@@ -96,6 +92,7 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
     private boolean time_alarm;
     private double longitude;
     private double latitude;
+    private AlarmVo editAlarm;
 
     private int tmp = 0;
 
@@ -163,10 +160,6 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
         date_button.setClickable(false);
         time_button.setClickable(false);
 
-        //getData();
-        setView(user);
-        setSwitch();
-        mActivity = this;
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -177,6 +170,45 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map1);
         mapFragment.getMapAsync(this);
+
+
+        alarm_name_text = (EditText)findViewById(R.id.alarm_name);
+        time_text = (TextView)findViewById(R.id.time_text);
+        date_text = (TextView)findViewById(R.id.date_text);
+        range_spinner = (Spinner)findViewById(R.id.range_spinner);
+        count_spinner = (Spinner)findViewById(R.id.alarm_count_spinner);
+        memo_text = (EditText)findViewById(R.id.memo_text);
+        location = (Switch)findViewById(R.id.location_switch);
+
+        editAlarm=(AlarmVo)intent.getParcelableExtra("AlarmVo");
+        if(editAlarm!=null)
+        {
+            alarm_name_text.setText(editAlarm.getAlarm_name());
+            time_text.setText(editAlarm.getTime());
+            date_text.setText(editAlarm.getDate());
+            range_spinner.setSelection((editAlarm.getRange()-100)/100);
+            count_spinner.setSelection(editAlarm.getAlarm_count()-1);
+            memo_text.setText(editAlarm.getMemo());
+            location.setChecked(editAlarm.isPlace_alarm());
+
+            if(editAlarm.isPlace_alarm())
+            {
+                date_button.setClickable(false);
+                time_button.setClickable(false);
+            }
+            else
+            {
+                date_button.setClickable(true);
+                time_button.setClickable(true);
+            }
+
+        }
+
+        //getData();
+        setView(user);
+        setSwitch();
+        mActivity = this;
+
     }
 
     //OnClick 시간 설정
@@ -203,8 +235,8 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Button date_button = (Button)findViewById(R.id.date_confirm);
                 Button time_button = (Button)findViewById(R.id.time_confirm);
-                TextView date_text = (TextView)findViewById(R.id.date_text);
-                TextView time_text = (TextView)findViewById(R.id.time_text);
+                date_text = (TextView)findViewById(R.id.date_text);
+                time_text = (TextView)findViewById(R.id.time_text);
                 Spinner range_spinner = (Spinner)findViewById(R.id.range_spinner);
                 if(isChecked){
                     date_text.setText("날짜 미설정");
@@ -242,11 +274,6 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
 
     //화면의 데이터 받아와서 알람 객체 생성
     private AlarmVo getData(){
-        EditText alarm_name_text = (EditText)findViewById(R.id.alarm_name);
-        time_text = (TextView)findViewById(R.id.time_text);
-        range_spinner = (Spinner)findViewById(R.id.range_spinner);
-        count_spinner = (Spinner)findViewById(R.id.alarm_count_spinner);
-        memo_text = (EditText)findViewById(R.id.memo_text);
         AlarmVo alarm;
 
         Switch locationSwitch = (Switch)findViewById(R.id.location_switch);
