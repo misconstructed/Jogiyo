@@ -72,7 +72,8 @@
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity android:name=".CheckInDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
 
         <activity
             android:name=".PreferencesActivity"

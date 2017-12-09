@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#ffff"
-    android:padding="15dp">
+    android:padding="15dp"
+    android:focusable="false">
 
     <TextView
         android:id="@+id/listname"
@@ -18,27 +19,25 @@
         android:text="listname"
         android:textColor="#000"/>
 
-    <ImageButton
-        android:id="@+id/star"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_toEndOf="@id/listname"
-        android:layout_toRightOf="@id/listname"
-        android:background="#ffff"
-        app:srcCompat="@android:drawable/btn_star_big_off" />
-
-
     <TextView
         android:id="@+id/listtime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/listname"
+        android:layout_below="@id/listplace"
         android:text="list time"
+        android:textSize="18dp"
+        android:textColor="#000"/>
+
+    <TextView
+        android:id="@+id/listplace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/listname"
+        android:text="list place"
         android:textSize="18dp"
         android:textColor="#000"/>
 
@@ -50,8 +49,10 @@
         android:layout_alignBottom="@+id/listname"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:focusable="false"
         android:textOff="Off"
-        android:textOn="On" />
+        android:textOn="On"
+        android:tag="position"/>
 
 
     <TextView
@@ -62,22 +63,8 @@
         android:textSize="17dp"
         android:textColor="#000"
         android:layout_below="@id/check"
-        android:layout_alignLeft="@id/check"
         android:layout_alignRight="@id/check"/>
 
-    <Button
-        android:id="@+id/detail"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/listtime"
-        android:layout_margin="1dp"
-        android:text="상세보기    >"
-        android:background="@color/theme_color"
-        android:textColor="#FFF"
-        android:textSize="10dp" />
 
 
 </RelativeLayout>

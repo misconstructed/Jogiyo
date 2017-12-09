@@ -5,6 +5,8 @@
     android:id="@+id/check_in_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:background="#fff"
     android:paddingTop="15dp">
@@ -21,17 +23,6 @@
         android:text="listname"
         android:textColor="#000"/>
 
-    <ImageButton
-        android:id="@+id/starDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_toEndOf="@id/listnameDetail"
-        android:layout_toRightOf="@id/listnameDetail"
-        android:background="#ffff"
-        app:srcCompat="@android:drawable/btn_star_big_off" />
 
     <TextView
         android:id="@+id/listplaceDetail"
