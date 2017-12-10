@@ -38,9 +38,9 @@ class ListAdapter extends BaseAdapter {
             view = new ListItemView(getApplicationContext());
         AlarmVo item = items.get(position);
         view.setName(item.getAlarm_name());
-        //view.setCheck(item.isActivate());
+        view.setCheck(item.isActivate());
         view.setTime(item.getTime());
-        //view.setPlace(String.format("%/3g%n",item.getX()) + " , " + String.format("%/3g%n", item.getY()));
+        view.setPlace(item.isPlace_alarm(),item.getX(),item.getY());
         return view;
     }
     void addItem(AlarmVo item) { items.add(item); }

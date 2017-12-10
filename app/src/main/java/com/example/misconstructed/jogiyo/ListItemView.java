@@ -1,14 +1,17 @@
 package com.example.misconstructed.jogiyo;
 
 import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017-11-26.
@@ -17,8 +20,8 @@ import android.widget.TextView;
 class ListItemView extends LinearLayout {
     TextView listname;
     TextView listtime;
+    TextView listplace;
     TextView checkText;
-    ImageButton star;
     boolean starCheck;
     Switch check;
 
@@ -37,8 +40,9 @@ class ListItemView extends LinearLayout {
         inflater.inflate(R.layout.list_item, this, true);
         listname = (TextView) findViewById(R.id.listname);
         listtime = (TextView) findViewById(R.id.listtime);
-        star = (ImageButton) findViewById(R.id.star);
+        listplace = (TextView)findViewById(R.id.listplace);
         check = (Switch) findViewById(R.id.check);
+        checkText=(TextView)findViewById(R.id.checkText);
 
         check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -54,21 +58,7 @@ class ListItemView extends LinearLayout {
             }
         });
 
-        star.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(starCheck)
-                {
-                    star.setImageResource(android.R.drawable.btn_star_big_off);
-                    starCheck=false;
-                }
-                else
-                {
-                    star.setImageResource(android.R.drawable.btn_star_big_on);
-                    starCheck=true;
-                }
-            }
-        });
+
     }
 
     void setName(String name){
@@ -79,16 +69,42 @@ class ListItemView extends LinearLayout {
         listtime.setText(time);
     }
 
-    void setStar(boolean star){
-        if(star) {
-            this.star.setImageResource(android.R.drawable.btn_star_big_on);
-            starCheck = true;
-        }
-        else {
-            this.star.setImageResource(android.R.drawable.btn_star_big_off);
-            starCheck = false;
-        }
+    void setPlace(double x,double y){
+        listplace.setText(findAddress(x,y));
     }
+
+    void setPlace(boolean locateCheck,double x,double y)
+    {
+        if(locateCheck)
+            setPlace(x,y);
+        else
+            listplace.setText("위치 미설정");
+    }
+
+    //위도경도로 주소 가져오기
+    //되는지는 확인안해봄
+    private String findAddress(double X,double Y)
+    {
+        String answer = new String();
+        Geocoder geocoder = new Geocoder(getContext());
+        List<Address> address;
+        try{
+            if(geocoder!=null){
+                address = geocoder.getFromLocation(X,Y,1);
+                if(!address.isEmpty())
+                    answer=address.get(0).getAddressLine(0).toString();
+                else
+                    answer="주소를 가져올 수 없습니다.";
+            }
+
+        }
+        catch(IOException e)
+        {
+            answer="주소를 가져올 수 없습니다.";
+        }
+        return answer;
+    }
+
 
     void setCheck(boolean check){
         if(check)

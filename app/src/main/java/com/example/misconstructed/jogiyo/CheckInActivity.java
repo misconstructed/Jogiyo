@@ -1,5 +1,6 @@
 package com.example.misconstructed.jogiyo;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,10 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -43,6 +42,7 @@ public class CheckInActivity extends AppCompatActivity
     private FloatingActionButton add;
     private TextView label;
     private ImageButton searchButton;
+    private EditText searchText;
     private UserVo user;
     private String name;
     private String id;
@@ -64,7 +64,6 @@ public class CheckInActivity extends AppCompatActivity
         Log.e("Check IN ::", user.toString());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        ListView listView = (ListView) findViewById(R.id.listView);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
@@ -80,10 +79,19 @@ public class CheckInActivity extends AppCompatActivity
         label=(TextView)findViewById(R.id.title);
         label.setText("Check In");
 
+        //검색기능
+        searchButton=(ImageButton)findViewById(R.id.search);
+        searchText=(EditText)findViewById(R.id.editText);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setList(user,searchText.getText().toString());
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(searchText.getWindowToken(),0);
+            }
+        });
 
-
-        setList(user);
-
+        setList(user,"");
         setView(user);
     }
 
@@ -121,7 +129,7 @@ public class CheckInActivity extends AppCompatActivity
         }
     }
 
-    private void setList(final UserVo user){
+    private void setList(final UserVo user,final String search){
         final ListAdapter adapter = new ListAdapter();
         ListView listView = (ListView) findViewById(R.id.listView);
         final List<AlarmVo> list = new ArrayList<AlarmVo>();
@@ -136,8 +144,10 @@ public class CheckInActivity extends AppCompatActivity
                     final AlarmVo alarm = userSnapshot.getValue(AlarmVo.class);
                     //회원정보가 맞는 경우
                     if(alarm.getId().equals(user.getId())){
-                        adapter.addItem(alarm);
-                        list.add(alarm);
+                        if(alarm.getAlarm_name().contains(search)) {
+                            adapter.addItem(alarm);
+                            list.add(alarm);
+                        }
                     }
                 }
             }
@@ -148,15 +158,21 @@ public class CheckInActivity extends AppCompatActivity
             }
         });
 
-
+        adapter.notifyDataSetChanged();
         listView.setAdapter(adapter);
+
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AlarmVo item = (AlarmVo) adapter.getItem(position);
-                Log.e("WOW!!!!! ::::::", ((AlarmVo) adapter.getItem(position)).getAlarm_name());
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+                AlarmVo item = (AlarmVo)adapterView.getItemAtPosition(position);
+                Intent intent = new Intent(getApplicationContext(),CheckInDetailActivity.class);
+                intent.putExtra("AlarmVo",item);
+                intent.putExtra("user", user);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
             }
         });
 
@@ -252,49 +268,4 @@ public class CheckInActivity extends AppCompatActivity
     }
 
 
-
-
-
-
-
-
-
-    private class ListItemAdapter extends BaseAdapter{
-
-        private ArrayList<ListItem> items = new ArrayList();
-
-        @Override
-        public int getCount() {
-            return items.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return items.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup viewGroup) {
-            ListItemView listView = (ListItemView) convertView;
-            if (convertView == null)
-                listView = new ListItemView(getApplicationContext());
-
-            ListItem item = items.get(position);
-
-            listView.setName(item.getName());
-            //listView.setPlace();
-            listView.setTime(item.getTime());
-            listView.setStar(item.isStar());
-            //listView.setCheck(item.isCheck());
-
-            return listView;
-        }
-
-        void addItem(ListItem item) { items.add(item); }
-    }
 }

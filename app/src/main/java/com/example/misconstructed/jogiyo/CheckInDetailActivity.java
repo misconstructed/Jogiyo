@@ -3,6 +3,8 @@ package com.example.misconstructed.jogiyo;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -14,23 +16,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.misconstructed.jogiyo.VO.AlarmVo;
 import com.example.misconstructed.jogiyo.VO.UserVo;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.util.List;
 
 public class CheckInDetailActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -41,8 +44,19 @@ public class CheckInDetailActivity extends AppCompatActivity
     private GridView menu;
     private Switch check;
     private TextView checkText;
-    private ImageButton star;
-    boolean starCheck=false;
+    private String alarm_date;
+
+    private boolean firstRangeChange = false;
+    private boolean firstCountChange = false;
+
+    private AlarmVo item;
+    private TextView listname;
+    private TextView listtime;
+    private TextView listplace;
+    private Switch alarm_place;
+    private EditText memo;
+    private Spinner range;
+    private Spinner alarm_count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +66,7 @@ public class CheckInDetailActivity extends AppCompatActivity
         setContentView(R.layout.activity_my_map);
 
         Intent intent = getIntent();
-        user = intent.getParcelableExtra("user");
+        user = (UserVo)intent.getParcelableExtra("user");
         if(user == null)
             Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
 
@@ -62,6 +76,127 @@ public class CheckInDetailActivity extends AppCompatActivity
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
+
+        item = (AlarmVo) intent.getParcelableExtra("AlarmVo");
+        listname = (TextView)findViewById(R.id.listnameDetail);
+        listtime = (TextView)findViewById(R.id.listtimeDetail);
+        listplace = (TextView)findViewById(R.id.listplaceDetail);
+        memo = (EditText)findViewById(R.id.memoDetail);
+        range = (Spinner)findViewById(R.id.rangeSpinnerDetail);
+        alarm_count= (Spinner)findViewById(R.id.alarmCountSpinnerDetail);
+        check=(Switch)findViewById(R.id.checkDetail);
+        checkText=(TextView)findViewById(R.id.checkTextDetail);
+        alarm_place=(Switch)findViewById(R.id.locationSwitchDetail);
+
+        listname.setText(item.getAlarm_name());
+
+        if(item.isActivate()) {
+            check.setChecked(true);
+            checkText.setText("ON");
+        }
+        else {
+            check.setChecked(false);
+            checkText.setText("OFF");
+        }
+
+        if(item.isTime_alarm())
+            listtime.setText(item.getTime()+" "+item.getDate());
+        else
+            listtime.setText("시간 미설정");
+
+        if(item.isPlace_alarm()) {
+            listplace.setText(findAddress(item.getX(),item.getY()));
+            alarm_place.setChecked(true);
+        }
+        else {
+            listplace.setText("위치 미설정");
+            alarm_place.setChecked(false);
+        }
+
+        memo.setText(item.getMemo());
+        memo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b)
+                {
+                    Intent edit = new Intent(getApplicationContext(),AddActivity.class);
+                    edit.putExtra("user",user);
+                    edit.putExtra("AlarmVo",item);
+                    edit.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(edit);
+                }
+            }
+        });
+        memo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                    Intent edit = new Intent(getApplicationContext(),AddActivity.class);
+                    edit.putExtra("user",user);
+                    edit.putExtra("AlarmVo",item);
+                    edit.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(edit);
+
+            }
+        });
+
+        range.setSelection((item.getRange()-100)/100);
+        alarm_count.setSelection(item.getAlarm_count()-1);
+
+        alarm_place.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    Intent edit = new Intent(getApplicationContext(),AddActivity.class);
+                    edit.putExtra("user",user);
+                    item.setPlace_alarm(alarm_place.isChecked());
+                    item.setTime_alarm(!alarm_place.isChecked());
+                    edit.putExtra("AlarmVo",item);
+                    edit.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(edit);
+
+            }
+        });
+
+
+        range.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(firstRangeChange) {
+                    Intent edit = new Intent(getApplicationContext(), AddActivity.class);
+                    edit.putExtra("user", user);
+                    item.setRange(Integer.parseInt(range.getSelectedItem().toString().substring(0,3)));
+                    edit.putExtra("AlarmVo", item);
+                    edit.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(edit);
+                }
+                firstRangeChange = true;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        alarm_count.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(firstCountChange) {
+                    Intent edit = new Intent(getApplicationContext(), AddActivity.class);
+                    edit.putExtra("user", user);
+                    item.setAlarm_count(Integer.parseInt(alarm_count.getSelectedItem().toString().substring(0,1)));
+                    edit.putExtra("AlarmVo", item);
+                    edit.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(edit);
+                }
+                firstCountChange = true;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         final ChooseItemAdapter adapter = new ChooseItemAdapter();
         adapter.addItem(0);adapter.addItem(1);adapter.addItem(2);
         menu=(GridView)findViewById(R.id.menuDetail);
@@ -74,8 +209,14 @@ public class CheckInDetailActivity extends AppCompatActivity
                 if (itemId == 0)
                     Toast.makeText(getApplicationContext(),"삭제",Toast.LENGTH_LONG).show();
                 //수정 버튼
-                if(itemId==1)
-                    Toast.makeText(getApplicationContext(),"수정",Toast.LENGTH_LONG).show();
+                if(itemId==1) {
+                    Intent edit = new Intent(getApplicationContext(),AddActivity.class);
+                    edit.putExtra("user",user);
+                    edit.putExtra("AlarmVo",item);
+                    edit.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(edit);
+                    //Toast.makeText(getApplicationContext(), "수정", Toast.LENGTH_LONG).show();
+                }
                 //공유 버튼
                 if(itemId==2)
                     Toast.makeText(getApplicationContext(),"공유",Toast.LENGTH_LONG).show();
@@ -83,8 +224,6 @@ public class CheckInDetailActivity extends AppCompatActivity
         });
         menu.setSelection(R.color.sidebar_id);
 
-        check=(Switch)findViewById(R.id.checkDetail);
-        checkText=(TextView)findViewById(R.id.checkTextDetail);
         //스위치리스너
         check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -102,22 +241,6 @@ public class CheckInDetailActivity extends AppCompatActivity
             }
         });
 
-        star=(ImageButton)findViewById(R.id.starDetail);
-        star.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(starCheck)
-                {
-                    star.setImageResource(android.R.drawable.btn_star_big_off);
-                    starCheck=false;
-                }
-                else
-                {
-                    star.setImageResource(android.R.drawable.btn_star_big_on);
-                    starCheck=true;
-                }
-            }
-        });
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -131,6 +254,30 @@ public class CheckInDetailActivity extends AppCompatActivity
 
 
         setView(user);
+    }
+
+
+    //위도경도로 주소 가져오기
+    //되는지는 확인안해봄
+    private String findAddress(double X,double Y)
+    {
+        String answer = new String();
+        Geocoder geocoder = new Geocoder(getApplicationContext());
+        List<Address> address;
+        try{
+            if(geocoder!=null){
+                address = geocoder.getFromLocation(X,Y,1);
+                if(!address.isEmpty())
+                    answer=address.get(0).getAddressLine(0).toString();
+                else
+                    answer="주소를 가져올 수 없습니다.";
+            }
+        }
+        catch(IOException e)
+        {
+            answer="주소를 가져올 수 없습니다.";
+        }
+        return answer;
     }
 
     public void test(View v){
