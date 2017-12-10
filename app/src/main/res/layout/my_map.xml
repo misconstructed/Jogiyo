@@ -9,12 +9,19 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical">
 
+    <Spinner
+        android:id="@+id/maplist"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#fff"
+        ></Spinner>
 
     <RelativeLayout
         android:id="@+id/map_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/theme_color">
+
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/add_button"
@@ -22,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:layout_margin="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
             app:srcCompat="@android:drawable/ic_input_add" />
 
         <fragment
