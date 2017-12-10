@@ -69,8 +69,14 @@ public class LocationService extends Service implements LocationListener {
         if (LocationThread == null) {
             LocationThread = new Thread("Location Alarm Thread") {
                 public void run() {
-
+                    while(true) {
                         iterator(user);
+                        try {
+                            sleep(10000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
                 }
             };
@@ -103,8 +109,12 @@ public class LocationService extends Service implements LocationListener {
                         if(alarm.isPlace_alarm() == true) {
                             Log.e("Alarm data ::::", alarm.toString());
                             //여기에서 위치 비교해야됨. 근데 현재 위치를 못구해서 못함.
+                            if(alarm.isActivate() == true){
+                                //위치 비교함 alarm.getRange();로 해서 지정한 거리 안에 있으면 알람
+                                //그냥 알람 활성화되면 alarm.isActivate() = false로 바꿔줘야 함
+                                //안그러면 계속 범위 안에 들어와서 계속 알람 울릴거같음..
 
-
+                            }
                         }
                     }
                 }

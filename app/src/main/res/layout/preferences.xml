@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="이름"
         android:layout_alignLeft="@+id/name"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="50dp"
         android:layout_alignParentTop="true"/>
 
     <TextView

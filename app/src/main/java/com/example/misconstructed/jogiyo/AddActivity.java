@@ -96,10 +96,10 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
 
     private int tmp = 0;
 
-    UserVo user;
+    private UserVo user;
 
-    AlarmManager alarmManager;
-    Calendar calendar;
+    private AlarmManager alarmManager;
+    private Calendar calendar;
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference alarm_database = firebaseDatabase.getReference("Alarm");
@@ -116,14 +116,14 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
     private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
 
     private AppCompatActivity mActivity;
-    boolean askPermissionOnceAgain = false;
-    boolean mRequestingLocationUpdates = false;
-    Location mCurrentLocatiion;
-    boolean mMoveMapByUser = true;
-    boolean mMoveMapByAPI = true;
-    LatLng currentPosition;
+    private boolean askPermissionOnceAgain = false;
+    private boolean mRequestingLocationUpdates = false;
+    private Location mCurrentLocatiion;
+    private boolean mMoveMapByUser = true;
+    private boolean mMoveMapByAPI = true;
+    private LatLng currentPosition;
 
-    LocationRequest locationRequest = new LocationRequest().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY).setInterval(UPDATE_INTERVAL_MS).setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
+    private LocationRequest locationRequest = new LocationRequest().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY).setInterval(UPDATE_INTERVAL_MS).setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -312,6 +312,9 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
         intent.putExtra("user", user);
         //Log.e("Add activity CA::", user.toString());
         startActivity(intent);
+
+
+
     }
 
     //날짜 선택 다이얼로그 보여주기

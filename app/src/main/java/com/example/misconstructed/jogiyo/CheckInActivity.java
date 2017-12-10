@@ -132,7 +132,7 @@ public class CheckInActivity extends AppCompatActivity
     private void setList(final UserVo user,final String search){
         final ListAdapter adapter = new ListAdapter();
         ListView listView = (ListView) findViewById(R.id.listView);
-        final List<AlarmVo> list = new ArrayList<AlarmVo>();
+        final List<String> list = new ArrayList<String>();
 
 
         alarm_database.addValueEventListener(new ValueEventListener() {
@@ -146,7 +146,8 @@ public class CheckInActivity extends AppCompatActivity
                     if(alarm.getId().equals(user.getId())){
                         if(alarm.getAlarm_name().contains(search)) {
                             adapter.addItem(alarm);
-                            list.add(alarm);
+                            Log.e("datasnapshot :::::::", userSnapshot.getKey());
+                            list.add(userSnapshot.getKey());
                         }
                     }
                 }
@@ -171,6 +172,7 @@ public class CheckInActivity extends AppCompatActivity
                 Intent intent = new Intent(getApplicationContext(),CheckInDetailActivity.class);
                 intent.putExtra("AlarmVo",item);
                 intent.putExtra("user", user);
+                intent.putExtra("key", list.get(position));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
             }

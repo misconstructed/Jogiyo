@@ -31,6 +31,8 @@ import android.widget.Toast;
 
 import com.example.misconstructed.jogiyo.VO.AlarmVo;
 import com.example.misconstructed.jogiyo.VO.UserVo;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.util.List;
@@ -50,13 +52,19 @@ public class CheckInDetailActivity extends AppCompatActivity
     private boolean firstCountChange = false;
 
     private AlarmVo item;
-    private TextView listname;
+    private EditText listname;
     private TextView listtime;
     private TextView listplace;
     private Switch alarm_place;
     private EditText memo;
     private Spinner range;
     private Spinner alarm_count;
+
+    private String key;
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference alarm_database = firebaseDatabase.getReference("Alarm");
+    private DatabaseReference database = firebaseDatabase.getReference();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +75,7 @@ public class CheckInDetailActivity extends AppCompatActivity
 
         Intent intent = getIntent();
         user = (UserVo)intent.getParcelableExtra("user");
+        key = intent.getStringExtra("key");
         if(user == null)
             Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
 
@@ -76,9 +85,12 @@ public class CheckInDetailActivity extends AppCompatActivity
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
+        label=(TextView)findViewById(R.id.title);
+        label.setText("Check In");
+
 
         item = (AlarmVo) intent.getParcelableExtra("AlarmVo");
-        listname = (TextView)findViewById(R.id.listnameDetail);
+        listname = (EditText) findViewById(R.id.listnameDetail);
         listtime = (TextView)findViewById(R.id.listtimeDetail);
         listplace = (TextView)findViewById(R.id.listplaceDetail);
         memo = (EditText)findViewById(R.id.memoDetail);
@@ -206,13 +218,19 @@ public class CheckInDetailActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 int itemId = (int)adapter.getItemId(position);
                 //삭제 버튼
-                if (itemId == 0)
-                    Toast.makeText(getApplicationContext(),"삭제",Toast.LENGTH_LONG).show();
+                if (itemId == 0) {
+                    Toast.makeText(getApplicationContext(), "삭제", Toast.LENGTH_LONG).show();
+                    alarm_database.child(key).removeValue();
+                    Intent edit = new Intent(getApplicationContext(),CheckInActivity.class);
+                    edit.putExtra("user",user);
+                    edit.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(edit);
+                }
                 //수정 버튼
                 if(itemId==1) {
-                    Intent edit = new Intent(getApplicationContext(),AddActivity.class);
+                    update_info();
+                    Intent edit = new Intent(getApplicationContext(),CheckInActivity.class);
                     edit.putExtra("user",user);
-                    edit.putExtra("AlarmVo",item);
                     edit.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(edit);
                     //Toast.makeText(getApplicationContext(), "수정", Toast.LENGTH_LONG).show();
@@ -256,6 +274,28 @@ public class CheckInDetailActivity extends AppCompatActivity
         setView(user);
     }
 
+
+    private void update_info(){
+
+
+
+        //이정재!!!! 지도에서 x,y값 받아와서 아래 변수에다가 저장해야함!!! 그러고나서 알람 정보에다가 넣어서 디비 업데이트 할꺼임!
+
+
+        int x = 0;
+        int y = 0;
+        listname = (EditText) findViewById(R.id.listnameDetail);
+        memo = (EditText)findViewById(R.id.memoDetail);
+        range = (Spinner)findViewById(R.id.rangeSpinnerDetail);
+        alarm_count= (Spinner)findViewById(R.id.alarmCountSpinnerDetail);
+
+        String alarm_name = listname.getText().toString();
+        String memo_text = memo.getText().toString();
+        int range_int = Integer.parseInt(range.getSelectedItem().toString().substring(0,3));
+        int count_int = Integer.parseInt(alarm_count.getSelectedItem().toString().substring(0,1));
+        AlarmVo new_alarm = new AlarmVo(user.getId(), alarm_name, range_int,  count_int, "시간 미설정", memo_text,0, "날짜 미설정", x, y, true, true, false);
+        alarm_database.child(key).setValue(new_alarm);
+    }
 
     //위도경도로 주소 가져오기
     //되는지는 확인안해봄
@@ -378,4 +418,13 @@ public class CheckInDetailActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == 100)
+            if(data.getStringExtra("result").equals("delete"))
+                alarm_database.child(key).removeValue();
+
+;
+    }
 }
