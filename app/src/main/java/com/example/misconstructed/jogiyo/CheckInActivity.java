@@ -91,9 +91,21 @@ public class CheckInActivity extends AppCompatActivity
             }
         });
 
-        setList(user,"");
+
         setView(user);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setList(user,"");
+        searchText=(EditText)findViewById(R.id.editText);
+        searchText.requestFocus();
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+    }
+
 
     public void findAlarm(View v){
         EditText finding_name_text = (EditText)findViewById(R.id.editText);
