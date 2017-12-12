@@ -51,11 +51,11 @@ public class CheckInActivity extends AppCompatActivity
     private DatabaseReference alarm_database = firebaseDatabase.getReference("Alarm");
     private DatabaseReference database = firebaseDatabase.getReference();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_map);
-
 
         Intent intent = getIntent();
         user = intent.getParcelableExtra("user");
@@ -90,7 +90,6 @@ public class CheckInActivity extends AppCompatActivity
                 imm.hideSoftInputFromWindow(searchText.getWindowToken(),0);
             }
         });
-
 
         setView(user);
     }
@@ -127,7 +126,7 @@ public class CheckInActivity extends AppCompatActivity
                         //회원정보가 맞는 경우
                         if(alarm.getId().equals(user.getId())){
                             if(alarm.getAlarm_name().contains(finding_name))
-                                adapter.addItem(alarm);
+                                adapter.addItem(alarm,userSnapshot.getKey());
                         }
                     }
                 }
@@ -146,18 +145,22 @@ public class CheckInActivity extends AppCompatActivity
         ListView listView = (ListView) findViewById(R.id.listView);
         final List<String> list = new ArrayList<String>();
 
+        adapter.clearItem();
+        list.clear();
 
         alarm_database.addValueEventListener(new ValueEventListener() {
             AlarmVo alarm;
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //iterator로 전체 알람 조회
+                adapter.clearItem();
+                Log.e("아니","이거뭔데");
                 for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
                     final AlarmVo alarm = userSnapshot.getValue(AlarmVo.class);
                     //회원정보가 맞는 경우
                     if(alarm.getId().equals(user.getId())){
                         if(alarm.getAlarm_name().contains(search)) {
-                            adapter.addItem(alarm);
+                            adapter.addItem(alarm,userSnapshot.getKey());
                             Log.e("datasnapshot :::::::", userSnapshot.getKey());
                             list.add(userSnapshot.getKey());
                         }

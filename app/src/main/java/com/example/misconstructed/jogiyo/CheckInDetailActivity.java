@@ -288,12 +288,13 @@ public class CheckInDetailActivity extends AppCompatActivity
         memo = (EditText)findViewById(R.id.memoDetail);
         range = (Spinner)findViewById(R.id.rangeSpinnerDetail);
         alarm_count= (Spinner)findViewById(R.id.alarmCountSpinnerDetail);
+        check = (Switch)findViewById(R.id.checkDetail);
 
         String alarm_name = listname.getText().toString();
         String memo_text = memo.getText().toString();
         int range_int = Integer.parseInt(range.getSelectedItem().toString().substring(0,3));
         int count_int = Integer.parseInt(alarm_count.getSelectedItem().toString().substring(0,1));
-        AlarmVo new_alarm = new AlarmVo(user.getId(), alarm_name, range_int,  count_int, "시간 미설정", memo_text,0, "날짜 미설정", x, y, true, true, false);
+        AlarmVo new_alarm = new AlarmVo(user.getId(), alarm_name, range_int,  count_int, "시간 미설정", memo_text,0, "날짜 미설정", x, y, check.isChecked(), true, false);
         alarm_database.child(key).setValue(new_alarm);
     }
 

@@ -5,10 +5,14 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import com.example.misconstructed.jogiyo.VO.AlarmVo;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,7 +26,6 @@ class ListItemView extends LinearLayout {
     TextView listtime;
     TextView listplace;
     TextView checkText;
-    boolean starCheck;
     Switch check;
 
     public ListItemView(Context context){
@@ -43,21 +46,6 @@ class ListItemView extends LinearLayout {
         listplace = (TextView)findViewById(R.id.listplace);
         check = (Switch) findViewById(R.id.check);
         checkText=(TextView)findViewById(R.id.checkText);
-
-        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b)
-                {
-                    checkText.setText("ON");
-                }
-                else
-                {
-                    checkText.setText("OFF");
-                }
-            }
-        });
-
 
     }
 
@@ -106,11 +94,21 @@ class ListItemView extends LinearLayout {
     }
 
 
-    void setCheck(boolean check){
-        if(check)
+    void setCheck(final AlarmVo item,final String key){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        final DatabaseReference alarm_database = firebaseDatabase.getReference("Alarm");
+
+        if(item.isActivate())
             checkText.setText("ON");
         else
             checkText.setText("OFF");
-        this.check.setChecked(check);
+        this.check.setChecked(item.isActivate());
+
+    }
+    Switch getCheck(){
+        return check;
+    }
+    TextView getCheckText(){
+        return checkText;
     }
 }

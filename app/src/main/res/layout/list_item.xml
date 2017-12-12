@@ -50,8 +50,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:focusable="false"
-        android:textOff="Off"
-        android:textOn="On"
         android:tag="position"/>
 
 
