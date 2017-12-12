@@ -69,7 +69,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -88,6 +90,7 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
     private String count;
     private String time;
     private String alarm_date;
+    private String key;
     private boolean place_alarm;
     private boolean time_alarm;
     private double longitude;
@@ -135,6 +138,7 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
         user = intent.getParcelableExtra("user");
         if(user == null)
             Toast.makeText(getApplicationContext(), "NULL", Toast.LENGTH_LONG).show();
+        key = intent.getStringExtra("key");
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -191,6 +195,7 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
             memo_text.setText(editAlarm.getMemo());
             location.setChecked(editAlarm.isPlace_alarm());
 
+
             if(editAlarm.isPlace_alarm())
             {
                 date_button.setClickable(false);
@@ -200,6 +205,16 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
             {
                 date_button.setClickable(true);
                 time_button.setClickable(true);
+                long now = System.currentTimeMillis()+600000;
+                Date date = new Date(now);
+                SimpleDateFormat mTime = new SimpleDateFormat("HH:mm",java.util.Locale.getDefault());
+                SimpleDateFormat mDate = new SimpleDateFormat("MM월 dd일",java.util.Locale.getDefault());
+                SimpleDateFormat DBDate = new SimpleDateFormat("YYYY/MM/dd");
+                String time = mTime.format(date);
+                String day = mDate.format(date);
+                alarm_date = DBDate.format(date);
+                date_text.setText(day);
+                time_text.setText(time);
             }
 
         }
@@ -246,8 +261,17 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
                     range_spinner.setClickable(true);
                     range_spinner.setEnabled(true);
                 } else {
-                    date_text.setText("01월 01일");
-                    time_text.setText("00:00");
+                    long now = System.currentTimeMillis()+600000;
+                    Date date = new Date(now);
+                    SimpleDateFormat mTime = new SimpleDateFormat("HH:mm",java.util.Locale.getDefault());
+                    SimpleDateFormat mDate = new SimpleDateFormat("MM월 dd일",java.util.Locale.getDefault());
+                    SimpleDateFormat DBDate = new SimpleDateFormat("YYYY/MM/dd");
+                    String time = mTime.format(date);
+                    String day = mDate.format(date);
+                    alarm_date = DBDate.format(date);
+                    date_text.setText(day);
+                    time_text.setText(time);
+
                     date_button.setClickable(true);
                     time_button.setClickable(true);
                     range_spinner.setClickable(false);
@@ -304,7 +328,10 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void confirm_alarm(View v){
         AlarmVo alarm = getData();
-        database.child("Alarm").push().setValue(alarm);
+        if(key==null)
+            database.child("Alarm").push().setValue(alarm);
+        else
+            alarm_database.child(key).setValue(alarm);
         Toast.makeText(getApplicationContext(), "등록 완료", Toast.LENGTH_LONG).show();
 
         setAlarm(alarm);

@@ -154,7 +154,6 @@ public class CheckInActivity extends AppCompatActivity
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //iterator로 전체 알람 조회
                 adapter.clearItem();
-                Log.e("아니","이거뭔데");
                 for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
                     final AlarmVo alarm = userSnapshot.getValue(AlarmVo.class);
                     //회원정보가 맞는 경우

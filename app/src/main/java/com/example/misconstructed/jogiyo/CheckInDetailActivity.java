@@ -126,33 +126,13 @@ public class CheckInDetailActivity extends AppCompatActivity
         }
 
         memo.setText(item.getMemo());
-        memo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if(b)
-                {
-                    Intent edit = new Intent(getApplicationContext(),AddActivity.class);
-                    edit.putExtra("user",user);
-                    edit.putExtra("AlarmVo",item);
-                    edit.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(edit);
-                }
-            }
-        });
-        memo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                    Intent edit = new Intent(getApplicationContext(),AddActivity.class);
-                    edit.putExtra("user",user);
-                    edit.putExtra("AlarmVo",item);
-                    edit.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(edit);
-
-            }
-        });
 
         range.setSelection((item.getRange()-100)/100);
+        if(!alarm_place.isChecked())
+        {
+            range.setClickable(false);
+            range.setEnabled(false);
+        }
         alarm_count.setSelection(item.getAlarm_count()-1);
 
         alarm_place.setOnClickListener(new View.OnClickListener() {
@@ -163,52 +143,14 @@ public class CheckInDetailActivity extends AppCompatActivity
                     item.setPlace_alarm(alarm_place.isChecked());
                     item.setTime_alarm(!alarm_place.isChecked());
                     edit.putExtra("AlarmVo",item);
-                    edit.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    edit.putExtra("key",key);
+                    edit.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     startActivity(edit);
 
             }
         });
 
 
-        range.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(firstRangeChange) {
-                    Intent edit = new Intent(getApplicationContext(), AddActivity.class);
-                    edit.putExtra("user", user);
-                    item.setRange(Integer.parseInt(range.getSelectedItem().toString().substring(0,3)));
-                    edit.putExtra("AlarmVo", item);
-                    edit.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(edit);
-                }
-                firstRangeChange = true;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        alarm_count.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(firstCountChange) {
-                    Intent edit = new Intent(getApplicationContext(), AddActivity.class);
-                    edit.putExtra("user", user);
-                    item.setAlarm_count(Integer.parseInt(alarm_count.getSelectedItem().toString().substring(0,1)));
-                    edit.putExtra("AlarmVo", item);
-                    edit.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(edit);
-                }
-                firstCountChange = true;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
         final ChooseItemAdapter adapter = new ChooseItemAdapter();
         adapter.addItem(0);adapter.addItem(1);adapter.addItem(2);
         menu=(GridView)findViewById(R.id.menuDetail);
