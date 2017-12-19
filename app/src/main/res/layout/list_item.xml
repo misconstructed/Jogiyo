@@ -63,6 +63,14 @@
         android:layout_below="@id/check"
         android:layout_alignRight="@id/check"/>
 
+    <ImageView
+        android:id="@+id/star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/btn_star_big_on"
+        android:layout_toRightOf="@id/listname"
+        android:layout_alignBottom="@id/listname"
+        />
 
 
 </RelativeLayout>

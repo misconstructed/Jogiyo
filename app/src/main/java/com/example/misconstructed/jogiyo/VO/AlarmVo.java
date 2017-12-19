@@ -21,11 +21,12 @@ public class AlarmVo implements Parcelable{
     private boolean activate;
     private boolean place_alarm;
     private boolean time_alarm;
+    private boolean importance;
 
     public AlarmVo() {
     }
 
-    public AlarmVo(String id, String alarm_name, int range, int alarm_count, String time, String memo, int weekday, String date, double x, double y, boolean activate, boolean place_alarm, boolean time_alarm) {
+    public AlarmVo(String id, String alarm_name, int range, int alarm_count, String time, String memo, int weekday, String date, double x, double y, boolean activate, boolean place_alarm, boolean time_alarm,boolean importance) {
         this.id = id;
         this.alarm_name = alarm_name;
         this.range = range;
@@ -39,10 +40,19 @@ public class AlarmVo implements Parcelable{
         this.activate = activate;
         this.place_alarm = place_alarm;
         this.time_alarm = time_alarm;
+        this.importance = importance;
     }
 
     public String getId() {
         return id;
+    }
+
+    public boolean isImportance() {
+        return importance;
+    }
+
+    public void setImportance(boolean importance) {
+        this.importance = importance;
     }
 
     public void setId(String id) {

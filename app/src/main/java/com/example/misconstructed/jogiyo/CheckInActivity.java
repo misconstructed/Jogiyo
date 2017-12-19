@@ -125,7 +125,16 @@ public class CheckInActivity extends AppCompatActivity
                         final AlarmVo alarm = userSnapshot.getValue(AlarmVo.class);
                         //회원정보가 맞는 경우
                         if(alarm.getId().equals(user.getId())){
-                            if(alarm.getAlarm_name().contains(finding_name))
+                            if(alarm.getAlarm_name().contains(finding_name)&&alarm.isImportance())
+                                adapter.addItem(alarm,userSnapshot.getKey());
+                        }
+                    }
+
+                    for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                        final AlarmVo alarm = userSnapshot.getValue(AlarmVo.class);
+                        //회원정보가 맞는 경우
+                        if(alarm.getId().equals(user.getId())){
+                            if(alarm.getAlarm_name().contains(finding_name)&&!alarm.isImportance())
                                 adapter.addItem(alarm,userSnapshot.getKey());
                         }
                     }
@@ -142,7 +151,7 @@ public class CheckInActivity extends AppCompatActivity
 
     private void setList(final UserVo user,final String search){
         final ListAdapter adapter = new ListAdapter();
-        ListView listView = (ListView) findViewById(R.id.listView);
+        final ListView listView = (ListView) findViewById(R.id.listView);
         final List<String> list = new ArrayList<String>();
 
         adapter.clearItem();
@@ -154,17 +163,31 @@ public class CheckInActivity extends AppCompatActivity
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //iterator로 전체 알람 조회
                 adapter.clearItem();
+                list.clear();
                 for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
                     final AlarmVo alarm = userSnapshot.getValue(AlarmVo.class);
                     //회원정보가 맞는 경우
                     if(alarm.getId().equals(user.getId())){
-                        if(alarm.getAlarm_name().contains(search)) {
+                        if(alarm.getAlarm_name().contains(search)&&alarm.isImportance()) {
                             adapter.addItem(alarm,userSnapshot.getKey());
                             Log.e("datasnapshot :::::::", userSnapshot.getKey());
                             list.add(userSnapshot.getKey());
                         }
                     }
                 }
+
+                for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                    final AlarmVo alarm = userSnapshot.getValue(AlarmVo.class);
+                    //회원정보가 맞는 경우
+                    if(alarm.getId().equals(user.getId())){
+                        if(alarm.getAlarm_name().contains(search)&&!alarm.isImportance()) {
+                            adapter.addItem(alarm,userSnapshot.getKey());
+                            Log.e("datasnapshot :::::::", userSnapshot.getKey());
+                            list.add(userSnapshot.getKey());
+                        }
+                    }
+                }
+                adapter.notifyDataSetChanged();
             }
 
             @Override

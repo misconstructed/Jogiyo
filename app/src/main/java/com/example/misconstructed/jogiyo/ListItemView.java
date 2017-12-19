@@ -5,8 +5,8 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -26,6 +26,7 @@ class ListItemView extends LinearLayout {
     TextView listtime;
     TextView listplace;
     TextView checkText;
+    ImageView star;
     Switch check;
 
     public ListItemView(Context context){
@@ -46,6 +47,7 @@ class ListItemView extends LinearLayout {
         listplace = (TextView)findViewById(R.id.listplace);
         check = (Switch) findViewById(R.id.check);
         checkText=(TextView)findViewById(R.id.checkText);
+        star = (ImageView)findViewById(R.id.star);
 
     }
 
@@ -105,10 +107,18 @@ class ListItemView extends LinearLayout {
         this.check.setChecked(item.isActivate());
 
     }
+
+    void setStar(Boolean star){
+        if(star)
+            this.star.setImageResource(android.R.drawable.star_big_on);
+        else
+            this.star.setImageResource(android.R.drawable.star_big_off);
+    }
     Switch getCheck(){
         return check;
     }
     TextView getCheckText(){
         return checkText;
     }
+    ImageView getStar(){return star;}
 }

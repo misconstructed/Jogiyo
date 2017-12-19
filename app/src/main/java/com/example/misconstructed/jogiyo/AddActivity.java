@@ -125,6 +125,7 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
     private boolean mMoveMapByUser = true;
     private boolean mMoveMapByAPI = true;
     private LatLng currentPosition;
+    private boolean importance=false;
 
     private LocationRequest locationRequest = new LocationRequest().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY).setInterval(UPDATE_INTERVAL_MS).setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
 
@@ -194,6 +195,7 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
             count_spinner.setSelection(editAlarm.getAlarm_count()-1);
             memo_text.setText(editAlarm.getMemo());
             location.setChecked(editAlarm.isPlace_alarm());
+            importance=editAlarm.isImportance();
 
 
             if(editAlarm.isPlace_alarm())
@@ -318,9 +320,9 @@ public class AddActivity extends AppCompatActivity implements NavigationView.OnN
         Log.e("Add activity before::", user.toString());
         Log.e("Add activity user::", user.getId());
         if(place_alarm == false)
-            alarm = new AlarmVo(user.getId(), alarm_name, Integer.parseInt(range), Integer.parseInt(count), time, memo, 0, alarm_date, 0, 0, true, place_alarm, time_alarm);
+            alarm = new AlarmVo(user.getId(), alarm_name, Integer.parseInt(range), Integer.parseInt(count), time, memo, 0, alarm_date, 0, 0, true, place_alarm, time_alarm,importance);
         else
-            alarm = new AlarmVo(user.getId(), alarm_name, Integer.parseInt(range), Integer.parseInt(count), "시간 미설정", memo, 0, "날짜 미설정", latitude, longitude, true, place_alarm, time_alarm);
+            alarm = new AlarmVo(user.getId(), alarm_name, Integer.parseInt(range), Integer.parseInt(count), "시간 미설정", memo, 0, "날짜 미설정", latitude, longitude, true, place_alarm, time_alarm,importance);
         return alarm;
     }
 

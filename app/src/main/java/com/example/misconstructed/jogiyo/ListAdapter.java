@@ -4,6 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -54,8 +55,30 @@ class ListAdapter extends BaseAdapter {
         view.setCheck(item,key);
         view.setTime(item.getTime());
         view.setPlace(item.isPlace_alarm(),item.getX(),item.getY());
+        view.setStar(item.isImportance());
         final Switch check=view.getCheck();
         final TextView checkText = view.getCheckText();
+        final ImageView star = view.getStar();
+
+        star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(item.isImportance()){
+                    star.setImageResource(android.R.drawable.star_big_off);
+                    item.setImportance(false);
+                    alarm_database.child(key).setValue(item);
+                    clearItem();
+                    notifyDataSetChanged();
+                }
+                else{
+                    star.setImageResource(android.R.drawable.star_big_on);
+                    item.setImportance(true);
+                    alarm_database.child(key).setValue(item);
+                    clearItem();
+                    notifyDataSetChanged();
+                }
+            }
+        });
 
         check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -81,6 +104,7 @@ class ListAdapter extends BaseAdapter {
                 }
             }
         });;
+
         return view;
     }
     void addItem(AlarmVo item,String key) {
